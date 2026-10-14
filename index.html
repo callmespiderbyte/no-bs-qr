@@ -205,6 +205,8 @@ summary .on{font-size:10px;font-weight:500;background:var(--ink);color:var(--pap
 .primary:disabled{opacity:.3;cursor:not-allowed}
 .dl-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
 .copybtn{font:inherit;font-family:var(--wide);font-stretch:125%;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--bone);color:var(--ink);border:1px solid var(--ink);padding:0 18px;cursor:pointer;white-space:nowrap;transition:background .15s}
+.btnfmt{font-family:var(--mono);font-stretch:100%;font-weight:400;font-size:11px;letter-spacing:0;text-transform:none;opacity:.6;margin-left:8px}
+.primary .btnfmt{margin-left:auto;margin-right:12px}
 .copybtn:hover:not(:disabled){background:var(--ash)}
 .copybtn:disabled{opacity:.3;cursor:not-allowed}
 .copybtn.done{background:var(--ink);color:var(--paper)}
@@ -564,8 +566,8 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
       <div class="warn" id="warn" hidden></div>
       <div class="dl-area">
         <div class="dl-row">
-          <button type="button" class="primary" data-dl><span class="dlText">Download</span><span aria-hidden="true">↓</span></button>
-          <button type="button" class="copybtn" data-copy><span class="copyText">Copy</span></button>
+          <button type="button" class="primary" data-dl><span class="dlText">Download</span><span class="btnfmt dlFmt"></span><span aria-hidden="true">↓</span></button>
+          <button type="button" class="copybtn" data-copy><span class="copyText">Copy</span><span class="btnfmt copyFmt"></span></button>
         </div>
         <div class="status" role="status"></div>
       </div>
@@ -608,8 +610,8 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
 <div class="dock" id="dock">
   <button type="button" class="thumb" id="thumb" aria-label="Enlarge preview"></button>
   <div class="info"><b id="dockTitle">Waiting for content</b><span id="dockSub" class="status-alt"></span></div>
-  <button type="button" class="copybtn" data-copy aria-label="Copy to clipboard"><span class="copyText">Copy</span></button>
-  <button type="button" class="primary" data-dl><span class="dlText">Download</span><span aria-hidden="true">↓</span></button>
+  <button type="button" class="copybtn" data-copy aria-label="Copy to clipboard"><span class="copyText">Copy</span><span class="btnfmt copyFmt"></span></button>
+  <button type="button" class="primary" data-dl><span class="dlText">Download</span><span class="btnfmt dlFmt"></span><span aria-hidden="true">↓</span></button>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
@@ -1042,13 +1044,18 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     $('#warn').hidden=!warn; $('#warn').textContent=warn;
 
     const n=S.fmts.length;
-    const label = n===0?'Pick a format':n===1?'Download '+S.fmts[0].toUpperCase():'Download .zip';
+    /* Plain verbs on the buttons; the file type sits beside them as a small tag, and only once there is a QR code to save */
+    const label = n===0?'Pick a format':'Download';
     $$('.dlText').forEach(e=>e.textContent=label);
+    const dfmt = !current||n===0?'':n===1?'.'+S.fmts[0]:'.zip';
+    $$('.dlFmt').forEach(e=>{ e.textContent=dfmt; e.hidden=!dfmt; });
     $$('[data-dl]').forEach(b=>b.disabled=!current||n===0||(S.bgT&&S.fgT));
     const cf=S.fmts[0]||'svg';
     const multi=S.fmts.length>1;
-    const cl=multi?'Pick one to copy':cf==='svg'?'Copy SVG':cf==='png'?'Copy PNG':'Copy image';
+    const cl=multi?'Pick one to copy':'Copy';
     $$('.copyText').forEach(e=>{ if(!e.parentNode.classList.contains('done')) e.textContent=cl; });
+    const cfmt = !current||multi?'':cf==='svg'?'svg':'image';
+    $$('.copyFmt').forEach(e=>{ e.textContent=e.parentNode.classList.contains('done')?'':cfmt; e.hidden=!cfmt||e.parentNode.classList.contains('done'); });
     $$('[data-copy]').forEach(b=>{ b.disabled=!current||multi; b.title=multi?'Copy works with one format at a time. Deselect the others, or download them all as a zip.':cf==='svg'?'Copies the SVG code. Paste it into Figma, Illustrator or your code.':cf==='png'?'Copies a PNG image to your clipboard.':'Clipboards only hold images as PNG, so this copies a PNG that looks like your '+cf.toUpperCase()+'.'; });
     $('#dockTitle').textContent = current ? fileBase()+' · '+S.fmts.map(f=>f.toUpperCase()).join(', ') : stateTxt;
     $('#dockSub').textContent = warn || (current ? (current.n+' × '+current.n+', '+padLabel()) : 'Your QR code builds here');
@@ -1176,7 +1183,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
       ta.remove(); return ok;
     }
   }
-  function flash(){ $$('[data-copy]').forEach(b=>{ b.classList.add('done'); b.querySelector('.copyText').textContent='Copied'; }); clearTimeout(flash.t); flash.t=setTimeout(()=>{ $$('[data-copy]').forEach(b=>b.classList.remove('done')); render(); },1600); }
+  function flash(){ $$('[data-copy]').forEach(b=>{ b.classList.add('done'); b.querySelector('.copyText').textContent='Copied'; b.querySelector('.copyFmt').hidden=true; }); clearTimeout(flash.t); flash.t=setTimeout(()=>{ $$('[data-copy]').forEach(b=>b.classList.remove('done')); render(); },1600); }
   async function doCopy(){
     if(!current||S.fmts.length>1) return;
     const f=S.fmts[0]||'svg';
