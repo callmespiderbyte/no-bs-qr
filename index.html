@@ -122,6 +122,14 @@ button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{border:1px solid var(--ink);padding:8px 12px}
 
+.bgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.unit{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;border:1px solid var(--ash);background:var(--paper)}
+.unit:focus-within{border-color:var(--ink)}
+.unit input{border:0!important;background:transparent!important;padding:9px 0 9px 10px!important;font-variant-numeric:tabular-nums;min-width:0;width:100%;font:inherit;font-size:13px;color:var(--ink);outline:none}
+.unit span{font-size:10px;color:var(--stone);padding:0 10px 0 4px}
+.bcol{max-width:220px}
+.note.bad{color:var(--ink);font-weight:500}
+@media (max-width:520px){.bgrid{grid-template-columns:1fr 1fr}}
 .padcustom{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:10px;font-size:11px;color:var(--stone)}
 .padcustom input{width:100%;font:inherit;font-size:13px;color:var(--ink);background:var(--paper);border:1px solid var(--ink);border-radius:0;padding:8px 10px;outline:none;font-variant-numeric:tabular-nums}
 .check{display:flex;align-items:center;gap:8px;font-size:11px;cursor:pointer;user-select:none}
@@ -420,7 +428,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
       <section class="w" aria-labelledby="h3w">
         <div class="w-head"><h2 id="h3w"><span>3</span>Shape</h2><small>Space and strength</small></div>
         <div class="w-body">
-          <div class="field"><span class="k">Padding</span>
+          <div class="field" id="padField"><span class="k">Padding</span>
             <div class="seg" role="group" aria-label="Padding around the code">
               <button type="button" data-pad="0" aria-pressed="false">None</button>
               <button type="button" data-pad="2" aria-pressed="false">Slim</button>
@@ -440,6 +448,30 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
               <button type="button" data-ecc="H" aria-pressed="false">H</button>
             </div>
             <span style="font-size:10px;color:var(--stone)" id="eccHint"></span></div>
+          <p class="note" id="padNote" hidden>Spacing is set in the border options below.</p>
+          <details id="borderBox">
+            <summary>Add a border</summary>
+            <div class="inner">
+              <div class="bgrid">
+                <div class="field"><label class="k" for="bT">Thickness</label>
+                  <div class="unit"><input id="bT" type="number" min="1" step="1" inputmode="numeric" data-k="bT"><span>px</span></div></div>
+                <div class="field"><label class="k" for="bG">Gap to code</label>
+                  <div class="unit"><input id="bG" type="number" min="0" step="1" inputmode="numeric" data-k="bG"><span>px</span></div></div>
+                <div class="field"><label class="k" for="bO">Edge to border</label>
+                  <div class="unit"><input id="bO" type="number" min="0" step="1" inputmode="numeric" data-k="bO"><span>px</span></div></div>
+              </div>
+              <p class="note" id="bGapHint"></p>
+              <div class="field">
+                <span class="k">Border colour</span>
+                <div class="colour bcol">
+                  <div class="swatch" id="bc-sw"><input id="bc-color" type="color" aria-label="Border colour"></div>
+                  <input id="bc-hex" type="text" maxlength="7" spellcheck="false" aria-label="Border hex">
+                </div>
+                <label class="check"><input id="bMatch" type="checkbox" data-k="bMatch"> Same as code</label>
+              </div>
+              <button type="button" class="ghost" id="borderRemove">Remove border</button>
+            </div>
+          </details>
           <details id="logoBox">
             <summary>Add a logo in the centre</summary>
             <div class="inner">
@@ -548,17 +580,35 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     evTitle:'',evLoc:'',evDate:'',evStart:'',evEnd:'',evAllDay:false,
     tel:'',smsNum:'',smsMsg:'',waNum:'',waMsg:'',geo:'',
     logo:null,logoPng:null,logoImg:null,logoRatio:1,logoName:'',logoPct:20,logoClear:true,
+    border:false,bT:16,bG:120,bO:40,bMatch:true,bColor:'#0c0c0b',
     bg:'#ffffff',bgT:false,fg:'#0c0c0b',fgT:false,ecc:'M',margin:4,padMode:'preset',padPx:48,size:1024,name:'',fmts:['svg']};
 
   /* Padding in module units. Custom pixel padding is converted against the export size, so the file gets exactly that many pixels per side. */
   const maxPad=()=>Math.floor(Number(S.size)*0.4);
+  /* Border geometry in module units. Pixel values are measured on the export size, so the file gets exactly those pixels. */
+  function frameGeom(n){
+    if(!S.border) return null;
+    const Z=Number(S.size);
+    let O=Math.max(0,Number(S.bO)||0), T=Math.max(1,Number(S.bT)||1), G=Math.max(0,Number(S.bG)||0);
+    const tot=O+T+G, cap=Z*0.4;
+    if(tot>cap){ const k=cap/tot; O*=k; T*=k; G*=k; }
+    const s=(Z-2*(O+T+G))/n;
+    return {mg:(O+T+G)/s, o:O/s, th:T/s, gap:G/s, modPx:s};
+  }
+  function ringPath(o,th,t,f){
+    const a=f(o), b=f(t-o), c=f(o+th), d=f(t-o-th);
+    return 'M'+a+' '+a+'H'+b+'V'+b+'H'+a+'Z'+'M'+c+' '+c+'V'+d+'H'+d+'V'+c+'Z';
+  }
+  /* Border colour: its own colour, or the code colour. With a cut-out code and "same as code", the border is cut out too. */
+  const strokeCol=()=>S.bMatch?(S.fgT?null:S.fg):S.bColor;
   function mgEff(n){
+    const fg=frameGeom(n); if(fg) return fg.mg;
     if(S.padMode!=='custom') return S.margin;
     const P=Math.max(0,Math.min(Number(S.padPx)||0,maxPad()));
     return P*n/(Number(S.size)-2*P);
   }
-  const padLabel=()=>S.padMode==='custom'?(Math.min(Number(S.padPx)||0,maxPad())+' px padding'):PAD_NAME[S.margin];
-  const noPad=()=>S.padMode==='custom'?!(Number(S.padPx)>0):S.margin===0;
+  const padLabel=()=>S.border?'with border':S.padMode==='custom'?(Math.min(Number(S.padPx)||0,maxPad())+' px padding'):PAD_NAME[S.margin];
+  const noPad=()=>S.border?false:S.padMode==='custom'?!(Number(S.padPx)>0):S.margin===0;
   const eccEff=()=>S.logo?'H':S.ecc;
 
   const PRESETS = [
@@ -683,9 +733,12 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     const mg=o.margin!=null?o.margin:mgEff(m.n), t=+(m.n+2*mg).toFixed(4);
     const f=x=>+x.toFixed(4);
     const mods=m.runs.map(([r,c,l])=>'M'+f(c+mg)+' '+f(r+mg)+'h'+l+'v1h-'+l+'z').join('');
+    const fr=o.margin==null?frameGeom(m.n):null, sc=fr?strokeCol():null;
+    const ring=fr?ringPath(fr.o,fr.th,t,f):'';
     let body='';
-    if(o.fgT && !o.bgT) body='<path fill="'+o.bg+'" fill-rule="evenodd" d="M0 0h'+t+'v'+t+'h-'+t+'z'+mods+'"/>';
+    if(o.fgT && !o.bgT) body='<path fill="'+o.bg+'" fill-rule="evenodd" d="M0 0h'+t+'v'+t+'h-'+t+'z'+mods+(fr&&!sc?ring:'')+'"/>';
     else { if(!o.bgT) body+='<rect width="'+t+'" height="'+t+'" fill="'+o.bg+'"/>'; if(!o.fgT) body+='<path fill="'+o.fg+'" d="'+mods+'"/>'; }
+    if(fr&&sc) body+='<path fill="'+sc+'" fill-rule="evenodd" d="'+ring+'"/>';
     const lr=!o.noLogo&&logoRect(m,mg);
     if(lr) body+='<image href="'+S.logo+'" xlink:href="'+S.logo+'" x="'+f(lr.x)+'" y="'+f(lr.y)+'" width="'+f(lr.w)+'" height="'+f(lr.h)+'" preserveAspectRatio="xMidYMid meet"/>';
     return '<svg xmlns="http://www.w3.org/2000/svg"'+(lr?' xmlns:xlink="http://www.w3.org/1999/xlink"':'')+' width="'+o.px+'" height="'+o.px+'" viewBox="0 0 '+t+' '+t+'" shape-rendering="crispEdges">'+body+'</svg>';
@@ -700,6 +753,14 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     if(bg){ ctx.fillStyle=bg; ctx.fillRect(0,0,size,size); }
     ctx.beginPath(); for(const [r,cc,l] of m.runs) ctx.rect((cc+mg)*s,(r+mg)*s,l*s,s);
     if(fg){ ctx.fillStyle=fg; ctx.fill(); } else { ctx.globalCompositeOperation='destination-out'; ctx.fill(); ctx.globalCompositeOperation='source-over'; }
+    const fr=frameGeom(m.n);
+    if(fr){
+      let sc=strokeCol(); if(fmt==='jpg'&&!sc) sc='#ffffff';
+      const a=fr.o*s, w=size-2*a, th=fr.th*s;
+      ctx.beginPath(); ctx.rect(a,a,w,w); ctx.rect(a+th,a+th,w-2*th,w-2*th);
+      if(sc){ ctx.fillStyle=sc; ctx.fill('evenodd'); }
+      else { ctx.globalCompositeOperation='destination-out'; ctx.fill('evenodd'); ctx.globalCompositeOperation='source-over'; }
+    }
     const lr=logoRect(m,mg);
     if(lr&&S.logoImg){ ctx.imageSmoothingQuality='high'; ctx.drawImage(S.logoImg,lr.x*s,lr.y*s,lr.w*s,lr.h*s); }
     return c;
@@ -714,6 +775,9 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
       if(!S.bgT){ doc.setFillColor(S.bg); doc.rect(0,0,W,W,'F'); }
       doc.setFillColor(S.fg); const e=0.015;
       for(const [r,c,l] of m.runs) doc.rect((c+mg)*s,(r+mg)*s,l*s+e,s+e,'F');
+      const fr=frameGeom(m.n), sc=fr&&strokeCol();
+      if(fr&&sc){ doc.setFillColor(sc); const a=fr.o*s, w=W-2*a, th=fr.th*s;
+        doc.rect(a,a,w,th,'F'); doc.rect(a,a+w-th,w,th,'F'); doc.rect(a,a,th,w,'F'); doc.rect(a+w-th,a,th,w,'F'); }
       const lr=logoRect(m,mg);
       if(lr&&S.logoPng) doc.addImage(S.logoPng,'PNG',lr.x*s,lr.y*s,lr.w*s,lr.h*s);
     }
@@ -788,6 +852,13 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     $('#logoBox').querySelector('summary').innerHTML='Add a logo in the centre'+(S.logo?'<span class="on">On</span>':'');
     if(S.logo){ if(!$('#logoPrev img')){ const i=document.createElement('img'); i.alt=''; $('#logoPrev').append(i); } $('#logoPrev img').src=S.logo; } else $('#logoPrev').innerHTML='';
     $$('[data-pad]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pad==='custom'?S.padMode==='custom':(S.padMode!=='custom'&&Number(b.dataset.pad)===S.margin))));
+    $('#padField').hidden=S.border; $('#padNote').hidden=!S.border;
+    $('#borderBox').open=S.border;
+    $('#borderBox').querySelector('summary').innerHTML='Add a border'+(S.border?'<span class="on">On</span>':'');
+    for(const k of ['bT','bG','bO']){ const el=$('#'+k); if(document.activeElement!==el) el.value=S[k]; }
+    const bcol=S.bMatch?(S.fgT?S.bg:S.fg):S.bColor;
+    $('#bc-color').value=bcol; if(document.activeElement!==$('#bc-hex')) $('#bc-hex').value=bcol.toUpperCase();
+    $('#bc-color').disabled=S.bMatch; $('#bc-hex').disabled=S.bMatch;
     $('#padCustom').hidden=S.padMode!=='custom';
     $('#padPx').max=maxPad();
     if(document.activeElement!==$('#padPx')) $('#padPx').value=S.padPx;
@@ -837,8 +908,14 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     if(!warn){
       if(S.bgT&&S.fgT) warn='Both colours are transparent, so nothing would show.';
       else if(!S.bgT&&!S.fgT){ const a=lum(S.bg),b=lum(S.fg),r=(Math.max(a,b)+.05)/(Math.min(a,b)+.05); if(r<3) warn='Low contrast. Phones may struggle to scan this.'; }
+      if(!warn && current && S.border){ const fr=frameGeom(current.n); if(fr.gap<2) warn='The border is too close to the code. Leave at least 2 modules (about '+Math.ceil(fr.modPx*2)+' px) or phones may misread it.'; }
       if(!warn && current && noPad()) warn='No padding. Leave space around it in your layout, or scanners can miss it.';
       if(!warn && current && S.fmts.includes('jpg') && (S.bgT||S.fgT)) warn='JPG has no transparency, so transparent parts export as white.';
+    }
+    if(S.border){
+      const n=current?current.n:25, fr=frameGeom(n), g=fr.gap, hint=$('#bGapHint');
+      hint.textContent='Gap = '+g.toFixed(1)+' modules. '+(g<2?'Too tight: aim for 2 or more ('+Math.ceil(fr.modPx*2)+' px). 4 is ideal.':g<4?'Scans fine. 4 modules is the official ideal.':'Ideal spacing.');
+      hint.classList.toggle('bad',g<2);
     }
     $('#warn').hidden=!warn; $('#warn').textContent=warn;
 
@@ -859,7 +936,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     const k=el.dataset.k;
     if(el.type==='checkbox') el.checked=!!S[k]; else el.value=S[k];
     el.addEventListener('input',()=>{
-      if(el.type==='checkbox') S[k]=el.checked; else if(k==='size'||el.type==='range') S[k]=Number(el.value); else S[k]=el.value;
+      if(el.type==='checkbox') S[k]=el.checked; else if(k==='size'||el.type==='range'||el.type==='number') S[k]=Number(el.value); else S[k]=el.value;
       setStatus(''); render();
     });
   });
@@ -892,6 +969,11 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     reader.onerror=()=>setStatus('That image could not be read. Try a PNG, JPG or SVG.');
     reader.readAsDataURL(file);
   });
+  $('#borderBox').addEventListener('toggle',()=>{ const o=$('#borderBox').open; if(o!==S.border){ S.border=o; render(); } });
+  $('#borderRemove').addEventListener('click',()=>{ S.border=false; render(); });
+  $('#bc-color').addEventListener('input',e=>{ S.bColor=e.target.value.toLowerCase(); render(); });
+  $('#bc-hex').addEventListener('input',e=>{ let v=e.target.value.trim(); if(v&&v[0]!=='#') v='#'+v; if(/^#[0-9a-f]{6}$/i.test(v)){ S.bColor=v.toLowerCase(); render(); } });
+  $('#bMatch').addEventListener('change',()=>{ if(!S.bMatch) S.bColor=S.fgT?S.bg:S.fg; render(); });
   $('#logoRemove').addEventListener('click',()=>{ Object.assign(S,{logo:null,logoPng:null,logoImg:null,logoName:''}); render(); });
   $$('[data-ecc]').forEach(b=>b.addEventListener('click',()=>{ S.ecc=b.dataset.ecc; render(); }));
   $$('[data-pad]').forEach(b=>b.addEventListener('click',()=>{
