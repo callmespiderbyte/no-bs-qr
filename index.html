@@ -175,6 +175,11 @@ summary .on{font-size:10px;font-weight:500;background:var(--ink);color:var(--pap
 .primary{font:inherit;font-family:var(--wide);font-stretch:125%;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:1px solid var(--ink);padding:16px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;width:100%}
 .primary:hover:not(:disabled){background:var(--graphite)}
 .primary:disabled{opacity:.3;cursor:not-allowed}
+.dl-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}
+.copybtn{font:inherit;font-family:var(--wide);font-stretch:125%;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--bone);color:var(--ink);border:1px solid var(--ink);padding:0 18px;cursor:pointer;white-space:nowrap;transition:background .15s}
+.copybtn:hover:not(:disabled){background:var(--ash)}
+.copybtn:disabled{opacity:.3;cursor:not-allowed}
+.copybtn.done{background:var(--ink);color:var(--paper)}
 .ghost{font:inherit;font-size:11px;background:none;border:0;color:var(--graphite);padding:2px 0;cursor:pointer;justify-self:start;border-bottom:1px solid var(--ash)}
 .ghost:hover{border-bottom-color:var(--ink)}
 .status{font-size:11px;color:var(--stone);min-height:1.5em}
@@ -202,7 +207,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
   .wrap{padding-bottom:calc(120px + env(safe-area-inset-bottom, 0px))}
   .dock{display:grid;position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--card);border-top:1px solid var(--ink);
     padding:10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
-    grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px}
+    grid-template-columns:auto minmax(0,1fr) auto auto;align-items:center;gap:12px}
   .dock .thumb{width:64px;height:64px;padding:0;border:1px solid var(--ash);background:var(--bone);cursor:pointer;display:grid;place-items:center;transition:width .25s,height .25s}
   .dock .thumb.checker{background-color:#fff;background-image:conic-gradient(#e7e6e2 25%,#fff 0 50%,#e7e6e2 0 75%,#fff 0);background-size:8px 8px}
   .dock .thumb svg,.dock .thumb canvas{width:100%;height:100%;display:block}
@@ -210,7 +215,9 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
   .dock .info b{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .dock .info span{color:var(--stone);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .dock .primary{width:auto;padding:14px 16px;font-size:12px;gap:10px}
-  .dock.big{grid-template-columns:1fr auto}
+  .dock.big{grid-template-columns:1fr auto auto}
+  .dock .copybtn{align-self:stretch;padding:0 12px;font-size:11px}
+  .dock .primary{align-self:stretch}
   .dock.big .thumb{grid-column:1 / -1;width:min(72vw,300px);height:min(72vw,300px);justify-self:center}
 }
 @media (max-width:520px){
@@ -218,6 +225,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
   .colours{grid-template-columns:1fr}
   .seg button{font-size:10px;padding:9px 3px}
 }
+@media (max-width:440px){.dock{grid-template-columns:auto auto minmax(0,1fr)}.dock .info{display:none}.dock .primary{justify-content:center}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -489,8 +497,10 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
       <div class="meta" id="meta"><span>–</span><span>–</span></div>
       <div class="warn" id="warn" hidden></div>
       <div class="dl-area">
-        <button type="button" class="primary" data-dl><span class="dlText">Download</span><span aria-hidden="true">↓</span></button>
-        <button type="button" class="ghost" id="copy">Copy SVG code</button>
+        <div class="dl-row">
+          <button type="button" class="primary" data-dl><span class="dlText">Download</span><span aria-hidden="true">↓</span></button>
+          <button type="button" class="copybtn" data-copy><span class="copyText">Copy</span></button>
+        </div>
         <div class="status" role="status"></div>
       </div>
     </aside>
@@ -522,6 +532,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
 <div class="dock" id="dock">
   <button type="button" class="thumb" id="thumb" aria-label="Enlarge preview"></button>
   <div class="info"><b id="dockTitle">Waiting for content</b><span id="dockSub" class="status-alt"></span></div>
+  <button type="button" class="copybtn" data-copy aria-label="Copy to clipboard"><span class="copyText">Copy</span></button>
   <button type="button" class="primary" data-dl><span class="dlText">Download</span><span aria-hidden="true">↓</span></button>
 </div>
 
@@ -835,7 +846,10 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     const label = n===0?'Pick a format':n===1?'Download '+S.fmts[0].toUpperCase():'Download .zip';
     $$('.dlText').forEach(e=>e.textContent=label);
     $$('[data-dl]').forEach(b=>b.disabled=!current||n===0||(S.bgT&&S.fgT));
-    $('#copy').disabled=!current;
+    const cf=S.fmts[0]||'svg';
+    const cl=cf==='svg'?'Copy SVG':cf==='png'?'Copy PNG':'Copy image';
+    $$('.copyText').forEach(e=>{ if(!e.parentNode.classList.contains('done')) e.textContent=cl; });
+    $$('[data-copy]').forEach(b=>{ b.disabled=!current; b.title=cf==='svg'?'Copies the SVG code. Paste it into Figma, Illustrator or your code.':cf==='png'?'Copies a PNG image to your clipboard.':'Clipboards only hold images as PNG, so this copies a PNG that looks like your '+cf.toUpperCase()+'.'; });
     $('#dockTitle').textContent = current ? fileBase()+' · '+S.fmts.map(f=>f.toUpperCase()).join(', ') : stateTxt;
     $('#dockSub').textContent = warn || (current ? (current.n+' × '+current.n+', '+padLabel()) : 'Your code builds here');
   }
@@ -946,16 +960,37 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
   }
   $$('[data-dl]').forEach(b=>b.addEventListener('click',doDownload));
 
-  $('#copy').addEventListener('click', async ()=>{
-    if(!current) return;
-    try{ await navigator.clipboard.writeText(current.svg); setStatus('SVG code copied.'); }
+  /* Copy: SVG goes on the clipboard as code; every other format goes on as a PNG image, the only image type browsers can copy. */
+  async function copyText(text){
+    try{ await navigator.clipboard.writeText(text); return true; }
     catch(e){
-      const ta=document.createElement('textarea'); ta.value=current.svg; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
+      const ta=document.createElement('textarea'); ta.value=text; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
       document.body.append(ta); ta.select();
-      try{ document.execCommand('copy'); setStatus('SVG code copied.'); }catch(_){ setStatus('Copy was blocked by your browser.'); }
-      ta.remove();
+      let ok=false; try{ ok=document.execCommand('copy'); }catch(_){}
+      ta.remove(); return ok;
     }
-  });
+  }
+  function flash(){ $$('[data-copy]').forEach(b=>{ b.classList.add('done'); b.querySelector('.copyText').textContent='Copied'; }); clearTimeout(flash.t); flash.t=setTimeout(()=>{ $$('[data-copy]').forEach(b=>b.classList.remove('done')); render(); },1600); }
+  async function doCopy(){
+    if(!current) return;
+    const f=S.fmts[0]||'svg';
+    if(f==='svg'){
+      if(await copyText(current.svg)){ flash(); setStatus('SVG code copied. Paste it into Figma, Illustrator or your code.'); }
+      else setStatus('Your browser blocked copying. Use Download instead.');
+      return;
+    }
+    try{
+      if(!navigator.clipboard||!window.ClipboardItem) throw new Error('unsupported');
+      const cv=canvasFor(current,f==='jpg'?'jpg':'png');
+      /* Pass the image as a promise so Safari still treats it as part of the click */
+      await navigator.clipboard.write([new ClipboardItem({'image/png':toBlob(cv,'image/png')})]);
+      flash();
+      setStatus(f==='png'?'PNG copied. Paste it anywhere.':'Copied as an image. For a real '+f.toUpperCase()+' file, use Download.');
+    }catch(e){
+      setStatus('This browser does not allow copying images here. Pick SVG to copy code, or use Download.');
+    }
+  }
+  $$('[data-copy]').forEach(b=>b.addEventListener('click',doCopy));
 
   render();
   if(inClaude) window.claude.use('downloads').then(d=>{ downloads=d; }).catch(()=>{ downloads=null; });
