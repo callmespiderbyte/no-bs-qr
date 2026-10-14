@@ -34,13 +34,14 @@
   --stone:#8c8a84;
   --graphite:#3b3a37;
   --ink:#0c0c0b;
+  --bad:#b8321c;
   --wide:"Archivo","Helvetica Neue",Arial,sans-serif;
   --mono:"Geist Mono","SFMono-Regular",Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){--paper:#0d0d0c;--card:#141413;--bone:#1c1c1a;--ash:#2e2d2a;--stone:#8a8882;--graphite:#c9c7c1;--ink:#f3f2ee;color-scheme:dark}
+  :root:not([data-theme="light"]){--paper:#0d0d0c;--card:#141413;--bone:#1c1c1a;--ash:#2e2d2a;--stone:#8a8882;--graphite:#c9c7c1;--ink:#f3f2ee;--bad:#ff7a63;color-scheme:dark}
 }
-:root[data-theme="dark"]{--paper:#0d0d0c;--card:#141413;--bone:#1c1c1a;--ash:#2e2d2a;--stone:#8a8882;--graphite:#c9c7c1;--ink:#f3f2ee;color-scheme:dark}
+:root[data-theme="dark"]{--paper:#0d0d0c;--card:#141413;--bone:#1c1c1a;--ash:#2e2d2a;--stone:#8a8882;--graphite:#c9c7c1;--ink:#f3f2ee;--bad:#ff7a63;color-scheme:dark}
 
 *{box-sizing:border-box}
 [hidden]{display:none!important}
@@ -111,7 +112,7 @@ select{appearance:none;cursor:pointer;padding-right:30px;background-image:linear
 select option{background:var(--paper);color:var(--ink)}
 input:focus-visible,textarea:focus-visible,select:focus-visible{border-color:var(--ink)}
 ::placeholder{color:var(--stone);opacity:.8}
-.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
 
 .seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1px solid var(--ink)}
 .seg button,.chip{font:inherit;font-size:11px;background:transparent;color:var(--ink);border:0;padding:9px 6px;cursor:pointer;transition:background .15s,color .15s;white-space:nowrap}
@@ -130,6 +131,8 @@ button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .bcol{max-width:220px}
 .note.bad{color:var(--ink);font-weight:500}
 @media (max-width:520px){.bgrid{grid-template-columns:1fr 1fr}}
+.err{margin:5px 0 0;font-size:11px;line-height:1.4;color:var(--bad)}
+.invalid,.unit.invalid{border-color:var(--bad)!important;box-shadow:inset 0 0 0 1px var(--bad)}
 .padcustom{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:10px;font-size:11px;color:var(--stone)}
 .padcustom input{width:100%;font:inherit;font-size:13px;color:var(--ink);background:var(--paper);border:1px solid var(--ink);border-radius:0;padding:8px 10px;outline:none;font-variant-numeric:tabular-nums}
 .check{display:flex;align-items:center;gap:8px;font-size:11px;cursor:pointer;user-select:none}
@@ -689,7 +692,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
       case 'tel': { const t=cleanTel(S.tel); return t?'tel:'+t:''; }
       case 'sms': { const t=cleanTel(S.smsNum); return t?'SMSTO:'+t+':'+(S.smsMsg||''):''; }
       case 'whatsapp': {
-        const d=String(S.waNum||'').replace(/\D/g,''); if(!d) return '';
+        const d=String(S.waNum||'').replace(/\D/g,'').replace(/^00/,''); if(!d) return '';
         return 'https://wa.me/'+d+(S.waMsg?'?text='+encodeURIComponent(S.waMsg):'');
       }
       case 'geo': {
@@ -835,6 +838,80 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
   const setStatus=t=>{ $$('.status').forEach(e=>e.textContent=t||''); if(t) $('#dockSub').textContent=t; };
 
   /* ---------- render ---------- */
+  /* ---------- validation ---------- */
+  const reEmail=/^[^\s@,;]+@[^\s@,;]+\.[^\s@,;]{2,}$/;
+  function urlErr(v){
+    v=String(v||'').trim(); if(!v) return '';
+    if(/\s/.test(v)) return 'Links can’t contain spaces.';
+    let u=v; if(!/^[a-z][a-z0-9+.-]*:/i.test(u)) u='https://'+u;
+    try{
+      const U=new URL(u);
+      if(/^https?:$/.test(U.protocol)){
+        const h=U.hostname;
+        if(!(h==='localhost'||/^\d{1,3}(\.\d{1,3}){3}$/.test(h)||/\.[a-z\u00a1-\uffff]{2,}$/i.test(h))) return 'That doesn’t look like a web address yet. Try something like example.com.';
+      }
+      return '';
+    }catch(e){ return 'That doesn’t look like a web address yet. Try something like example.com.'; }
+  }
+  function emailErr(v){
+    v=String(v||'').trim(); if(!v) return '';
+    const parts=v.split(',').map(x=>x.trim()).filter(Boolean);
+    return parts.every(x=>reEmail.test(x))?'':'Check the address. It should look like name@example.com.';
+  }
+  function telErr(v,needCC){
+    v=String(v||'').trim(); if(!v) return '';
+    if(/[^\d+\s().\-\/]/.test(v)) return 'Use digits only, plus spaces, +, -, ( or ).';
+    const d=v.replace(/\D/g,'');
+    if(d.length<6) return 'That number looks too short.';
+    if(d.length>15) return 'That number looks too long. International numbers have at most 15 digits.';
+    if(needCC && !/^\s*(\+|00)/.test(v)) return 'Add the country code, e.g. +49 151 2345678.';
+    return '';
+  }
+  function validate(){
+    const e={}, put=(id,msg)=>{ if(msg) e[id]=msg; };
+    switch(S.type){
+      case 'url': put('f-url',urlErr(S.url)); break;
+      case 'email': put('f-email-to',emailErr(S.emailTo)); break;
+      case 'wifi': {
+        if(utf8(S.ssid||'').length>32) put('f-wifi-ssid','Network names can be at most 32 characters.');
+        const pw=S.pass||'';
+        if(S.sec==='WPA'&&pw&&(pw.length<8||pw.length>63)) put('f-wifi-pass','WPA passwords are 8 to 63 characters.');
+        if(S.sec==='WEP'&&pw&&!([5,13].includes(pw.length)||/^([0-9a-f]{10}|[0-9a-f]{26})$/i.test(pw))) put('f-wifi-pass','WEP keys are 5 or 13 characters, or 10 or 26 hex digits.');
+        if(S.sec!=='nopass'&&!pw&&S.ssid) put('f-wifi-pass','Add the password, or set Security to None.');
+        break;
+      }
+      case 'vcard':
+        put('f-v-tel',telErr(S.vTel)); put('f-v-email',emailErr(S.vEmail)); put('f-v-url',urlErr(S.vUrl)); break;
+      case 'event':
+        if(S.evTitle&&!S.evDate) put('f-ev-date','Pick a date.');
+        if(!S.evAllDay&&S.evEnd&&!S.evStart) put('f-ev-start','Add a start time, or tick All day.');
+        if(!S.evAllDay&&S.evStart&&S.evEnd&&S.evEnd<=S.evStart) put('f-ev-end','The end time has to be after the start time.');
+        break;
+      case 'tel': put('f-tel',telErr(S.tel)); break;
+      case 'sms': put('f-sms-num',telErr(S.smsNum)); break;
+      case 'whatsapp': put('f-wa-num',telErr(S.waNum,true)); break;
+      case 'geo': {
+        const m=String(S.geo||'').match(/^\s*(-?\d+(?:\.\d+)?)\s*,\s*(-?\d+(?:\.\d+)?)\s*$/);
+        if(m&&(Math.abs(+m[1])>90||Math.abs(+m[2])>180)) put('f-geo','Coordinates are latitude (−90 to 90), then longitude (−180 to 180).');
+        break;
+      }
+    }
+    return e;
+  }
+  const touched=new Set();
+  function showErrors(errs){
+    $$('[data-pane] input,[data-pane] textarea,[data-pane] select').forEach(el=>{
+      const msg=touched.has(el.id)?errs[el.id]:'';
+      let p=el.parentNode.querySelector('.err[data-for="'+el.id+'"]');
+      if(msg){
+        if(!p){ p=document.createElement('p'); p.className='err'; p.dataset.for=el.id; p.id='err-'+el.id; p.setAttribute('role','alert'); el.insertAdjacentElement('afterend',p); }
+        p.textContent=msg; el.classList.add('invalid'); el.setAttribute('aria-invalid','true'); el.setAttribute('aria-describedby',p.id);
+      } else {
+        if(p) p.remove(); el.classList.remove('invalid'); el.removeAttribute('aria-invalid'); el.removeAttribute('aria-describedby');
+      }
+    });
+  }
+
   function render(){
     $$('[data-type]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.type===S.type)));
     $$('[data-pane]').forEach(p=>p.hidden=p.dataset.pane!==S.type);
@@ -874,8 +951,10 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
       hx.disabled=T; $('#'+k+'-color').disabled=T; $('#'+k+'-sw').classList.toggle('off',T);
     }
 
-    const p=payload(), frame=$('#frame'), thumb=$('#thumb');
-    current=null; let warn='', stateTxt='Waiting for content';
+    const errs=validate(), blocked=Object.keys(errs).length>0, shown=Object.keys(errs).some(id=>touched.has(id));
+    showErrors(errs);
+    const p=blocked?'':payload(), frame=$('#frame'), thumb=$('#thumb');
+    current=null; let warn='', stateTxt=shown?'Check the details':blocked?'Keep going':'Waiting for content';
     if(p){
       try{
         const m=build(p);
@@ -903,7 +982,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     const st=$('#state'); st.textContent=stateTxt; st.className='state'+(current?' ready':' busy');
     $('#meta').innerHTML = current
       ? '<span>'+current.n+' × '+current.n+' modules, '+padLabel()+'</span><span>'+utf8(p).length+' bytes</span>'
-      : '<span>Type something in Content to start</span><span></span>';
+      : '<span>'+(shown?'Fix the highlighted field to build your code':blocked?'Keep typing, your code builds once the details check out':'Type something in Content to start')+'</span><span></span>';
 
     if(!warn){
       if(S.bgT&&S.fgT) warn='Both colours are transparent, so nothing would show.';
@@ -941,6 +1020,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
       setStatus(''); render();
     });
   });
+  document.addEventListener('focusout',e=>{ const el=e.target; if(el&&el.id&&el.closest&&el.closest('[data-pane]')&&String(el.value||'').trim()){ touched.add(el.id); render(); } });
   $$('[data-type]').forEach(b=>b.addEventListener('click',()=>{ S.type=b.dataset.type; closeMenu(); render(); }));
   const menu=$('#moreMenu'), moreBtn=$('#moreBtn');
   function closeMenu(){ menu.hidden=true; moreBtn.setAttribute('aria-expanded','false'); }

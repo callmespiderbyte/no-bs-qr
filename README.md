@@ -18,6 +18,7 @@ A single-page QR code maker for links, plain text, email and Wi-Fi. It exports c
 - Background and code colour, each with a transparent option, plus tonal presets
 - Padding: none, slim, standard, roomy or an exact pixel value
 - Optional border with its own thickness, colour, gap to the code and margin to the edge, with a live check that the gap stays scannable
+- Checks what you type (links, email addresses, phone numbers, Wi-Fi passwords, event times, coordinates) and only builds the code once it's valid
 - Copy to clipboard: SVG as code, everything else as a PNG image
 - Error correction L, M, Q or H
 - SVG as a single merged vector path, raster exports from 512 to 4096 px, vector PDF
