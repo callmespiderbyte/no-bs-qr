@@ -23,7 +23,7 @@ A single-page QR code maker for links, plain text, email and Wi-Fi. It exports c
 
 ## Live
 
-Coming soon at no-bs-qr.vercel.app
+Deployed on Vercel from the `main` branch. Every push goes live automatically.
 
 ## Use it
 
