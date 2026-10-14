@@ -1,15 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://nobs-qr.vercel.app/</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nobs-qr.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://nobs-qr.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nobs-qr.vercel.app/"/>
   </url>
   <url>
-    <loc>https://nobs-qr.vercel.app/llms.txt</loc>
+    <loc>https://nobs-qr.vercel.app/wifi-qr-code-generator/</loc>
     <lastmod>2026-10-14</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.5</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nobs-qr.vercel.app/vcard-qr-code-generator/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nobs-qr.vercel.app/qr-code-with-logo/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nobs-qr.vercel.app/svg-qr-code-generator/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nobs-qr.vercel.app/whatsapp-qr-code-generator/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nobs-qr.vercel.app/event-qr-code-generator/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nobs-qr.vercel.app/email-qr-code-generator/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nobs-qr.vercel.app/de/</loc>
+    <lastmod>2026-10-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://nobs-qr.vercel.app/"/>
+    <xhtml:link rel="alternate" hreflang="de" href="https://nobs-qr.vercel.app/de/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://nobs-qr.vercel.app/"/>
   </url>
 </urlset>

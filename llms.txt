@@ -39,6 +39,20 @@ These are static QR codes. The content is encoded in the pattern itself, so ther
 
 Input is checked before a QR code is built: web addresses, email addresses, phone numbers (with country code for WhatsApp), Wi-Fi password length, event times and coordinate ranges.
 
+<!-- pages:start -->
+## Pages
+
+- [Free QR code generator](https://nobs-qr.vercel.app/): Free QR code generator with no sign-up, no watermark and no expiry. Make QR codes for links, Wi-Fi, vCards, events and more, with your logo. Download SVG, PNG, JPG, WEBP or PDF. Runs privately in your browser.
+- [Free Wi-Fi QR code generator](https://nobs-qr.vercel.app/wifi-qr-code-generator/): Make a Wi-Fi QR code for free. Guests scan it and join your network without typing the password. WPA, WEP or open networks. No sign-up, no watermark, runs in your browser.
+- [Free vCard QR code generator](https://nobs-qr.vercel.app/vcard-qr-code-generator/): Make a vCard QR code for free. One scan saves your name, number, email and website to a phone’s contacts. No sign-up, no watermark, no expiry.
+- [Free QR code generator with logo](https://nobs-qr.vercel.app/qr-code-with-logo/): Add your logo to a QR code for free. Upload PNG, JPG or SVG and error correction switches to high automatically, so it still scans. No sign-up, no watermark.
+- [Free SVG QR code generator](https://nobs-qr.vercel.app/svg-qr-code-generator/): Download QR codes as clean SVG vectors for free. One merged path, sharp at any size, ready for Illustrator, Figma and print. Also PNG, JPG, WEBP and vector PDF.
+- [Free WhatsApp QR code generator](https://nobs-qr.vercel.app/whatsapp-qr-code-generator/): Make a WhatsApp QR code for free. One scan opens a chat with your number, with a message ready to send. No sign-up, no watermark, no expiry.
+- [Free calendar event QR code generator](https://nobs-qr.vercel.app/event-qr-code-generator/): Make a QR code that adds an event to the calendar. Name, place, date and time in one scan. Free, no sign-up, no watermark.
+- [Free email QR code generator](https://nobs-qr.vercel.app/email-qr-code-generator/): Make an email QR code for free. One scan opens a new email to your address, with subject and message filled in. No sign-up, no watermark.
+- [Kostenloser QR-Code-Generator](https://nobs-qr.vercel.app/de/): Kostenloser QR-Code-Generator ohne Anmeldung, ohne Wasserzeichen und ohne Ablaufdatum. QR-Codes für Links, WLAN, Visitenkarten, Termine und mehr, auch mit Logo. Download als SVG, PNG, JPG, WEBP oder PDF. Läuft komplett im Browser.
+<!-- pages:end -->
+
 ## Links
 
 - Tool: https://nobs-qr.vercel.app/

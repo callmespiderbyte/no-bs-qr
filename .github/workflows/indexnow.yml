@@ -1,0 +1,28 @@
+# Tells Bing and the other IndexNow search engines about every page
+# as soon as a production deploy on Vercel succeeds.
+# Google does not use IndexNow; it reads sitemap.xml instead.
+name: IndexNow
+
+on:
+  deployment_status:
+  workflow_dispatch:
+
+jobs:
+  ping:
+    if: github.event_name == 'workflow_dispatch' || (github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Submit URLs from sitemap.xml
+        env:
+          HOST: nobs-qr.vercel.app
+          KEY: 73d279e09496f4482630faf50c8d43b7
+        run: |
+          URLS=$(grep -o '<loc>[^<]*</loc>' sitemap.xml | sed -e 's#<loc>##' -e 's#</loc>##' | jq -R . | jq -s -c .)
+          echo "Submitting: $URLS"
+          BODY=$(jq -n -c --arg host "$HOST" --arg key "$KEY" --argjson urls "$URLS" \
+            '{host: $host, key: $key, keyLocation: ("https://" + $host + "/" + $key + ".txt"), urlList: $urls}')
+          STATUS=$(curl -s -o response.txt -w '%{http_code}' -X POST 'https://api.indexnow.org/indexnow' \
+            -H 'Content-Type: application/json; charset=utf-8' -d "$BODY")
+          echo "IndexNow answered $STATUS"; cat response.txt || true
+          case "$STATUS" in 200|202) exit 0 ;; *) exit 1 ;; esac
