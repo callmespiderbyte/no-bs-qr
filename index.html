@@ -15,9 +15,9 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"No BS QR","alternateName":"No BS QR Code Generator","description":"Free QR code generator. No sign-up, no watermark, no expiry. Links, text, email, Wi-Fi, vCard, calendar events, phone, SMS, WhatsApp and location. Optional logo and UTM tracking. Exports SVG, PNG, JPG, WEBP and PDF.","applicationCategory":"DesignApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"url":"https://nobs-qr.vercel.app/","creator":{"@type":"Organization","name":"Jomiro Eming Design Lab","url":"https://jomiro.de"}}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Is this QR code generator really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every feature is free, with no sign-up, no watermark, no trial and no premium tier."}},
-{"@type":"Question","name":"Do the QR codes expire?","acceptedAnswer":{"@type":"Answer","text":"No. These are static QR codes: the content is stored in the code itself, so they work for as long as the printed code exists."}},
+{"@type":"Question","name":"Do the QR codes expire?","acceptedAnswer":{"@type":"Answer","text":"No. These are static QR codes: the content is stored in the QR code itself, so they work for as long as the printed QR code exists."}},
 {"@type":"Question","name":"Is my data safe?","acceptedAnswer":{"@type":"Answer","text":"Yes. The QR code is generated in your browser. Nothing you type or upload is sent to a server or stored."}},
-{"@type":"Question","name":"Can I add a logo to my QR code?","acceptedAnswer":{"@type":"Answer","text":"Yes. Add a logo in the centre and error correction is raised automatically so the code still scans."}},
+{"@type":"Question","name":"Can I add a logo to my QR code?","acceptedAnswer":{"@type":"Answer","text":"Yes. Add a logo in the centre and error correction is raised automatically so the QR code still scans."}},
 {"@type":"Question","name":"Can I track QR code scans?","acceptedAnswer":{"@type":"Answer","text":"Yes, with UTM parameters on links. Scans show up in your own analytics, such as Google Analytics or Plausible, with no redirect service in between."}},
 {"@type":"Question","name":"Which file formats can I download?","acceptedAnswer":{"@type":"Answer","text":"SVG, PNG, JPG, WEBP and PDF. Pick several and they download together as one zip file."}}]}</script>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2021%2021%22%20shape-rendering%3D%22crispEdges%22%3E%3Cpath%20fill%3D%22%230c0c0b%22%20d%3D%22M0%200h21v1h-21zM0%201h21v1h-21zM0%202h2v1h-2zM4%202h4v1h-4zM10%202h2v1h-2zM18%202h3v1h-3zM0%203h2v1h-2zM6%203h2v1h-2zM10%203h1v1h-1zM13%203h4v1h-4zM19%203h2v1h-2zM0%204h2v1h-2zM4%204h1v1h-1zM7%204h1v1h-1zM10%204h1v1h-1zM13%204h4v1h-4zM19%204h2v1h-2zM0%205h2v1h-2zM4%205h2v1h-2zM10%205h1v1h-1zM13%205h4v1h-4zM19%205h2v1h-2zM0%206h2v1h-2zM4%206h4v1h-4zM10%206h2v1h-2zM18%206h3v1h-3zM0%207h21v1h-21zM0%208h2v1h-2zM9%208h3v1h-3zM19%208h2v1h-2zM0%209h2v1h-2zM4%209h4v1h-4zM10%209h1v1h-1zM13%209h8v1h-8zM0%2010h2v1h-2zM9%2010h3v1h-3zM18%2010h3v1h-3zM0%2011h2v1h-2zM4%2011h4v1h-4zM10%2011h7v1h-7zM19%2011h2v1h-2zM0%2012h2v1h-2zM9%2012h2v1h-2zM18%2012h3v1h-3zM0%2013h21v1h-21zM0%2014h3v1h-3zM9%2014h2v1h-2zM18%2014h3v1h-3zM0%2015h2v1h-2zM4%2015h4v1h-4zM10%2015h1v1h-1zM13%2015h4v1h-4zM19%2015h2v1h-2zM0%2016h2v1h-2zM4%2016h1v1h-1zM7%2016h1v1h-1zM10%2016h1v1h-1zM18%2016h3v1h-3zM0%2017h2v1h-2zM4%2017h2v1h-2zM9%2017h2v1h-2zM13%2017h3v1h-3zM18%2017h3v1h-3zM0%2018h3v1h-3zM7%2018h1v1h-1zM10%2018h1v1h-1zM13%2018h4v1h-4zM19%2018h2v1h-2zM0%2019h21v1h-21zM0%2020h21v1h-21z%22/%3E%3C/svg%3E">
@@ -271,7 +271,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     <main class="widgets">
       <!-- 1. Content -->
       <section class="w span" aria-labelledby="h1w">
-        <div class="w-head"><h2 id="h1w"><span>1</span>Content</h2><small>What the code opens</small></div>
+        <div class="w-head"><h2 id="h1w"><span>1</span>Content</h2><small>What the QR code opens</small></div>
         <div class="w-body">
           <div class="typebar">
             <div class="seg" role="group" aria-label="Content type">
@@ -371,7 +371,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
               <input id="f-geo" type="text" data-k="geo" placeholder="A street address, or 53.5511, 9.9937" autocomplete="off"></div>
           </div>
           <div data-pane="text" hidden>
-            <textarea id="f-text" data-k="text" placeholder="Anything you want the code to say" aria-label="Text"></textarea>
+            <textarea id="f-text" data-k="text" placeholder="Anything you want the QR code to say" aria-label="Text"></textarea>
           </div>
           <div data-pane="email" hidden>
             <div class="w-body" style="padding:0">
@@ -425,10 +425,10 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
                   <label class="check"><input id="bg-trans" type="checkbox" data-k="bgT"> Transparent</label>
                 </div>
                 <div class="field">
-                  <span class="k">Code</span>
+                  <span class="k">QR code</span>
                   <div class="colour">
-                    <div class="swatch" id="fg-sw"><input id="fg-color" type="color" aria-label="Code colour"></div>
-                    <input id="fg-hex" type="text" maxlength="7" spellcheck="false" aria-label="Code hex">
+                    <div class="swatch" id="fg-sw"><input id="fg-color" type="color" aria-label="QR code colour"></div>
+                    <input id="fg-hex" type="text" maxlength="7" spellcheck="false" aria-label="QR code hex">
                   </div>
                   <label class="check"><input id="fg-trans" type="checkbox" data-k="fgT"> Transparent</label>
                 </div>
@@ -443,7 +443,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
         <div class="w-head"><h2 id="h3w"><span>3</span>Shape</h2><small>Space and strength</small></div>
         <div class="w-body">
           <div class="field" id="padField"><span class="k">Padding</span>
-            <div class="seg" role="group" aria-label="Padding around the code">
+            <div class="seg" role="group" aria-label="Padding around the QR code">
               <button type="button" data-pad="0" aria-pressed="false">None</button>
               <button type="button" data-pad="2" aria-pressed="false">Slim</button>
               <button type="button" data-pad="4" aria-pressed="true">Standard</button>
@@ -469,7 +469,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
               <div class="bgrid">
                 <div class="field"><label class="k" for="bT">Thickness</label>
                   <div class="unit"><input id="bT" type="number" min="1" step="1" inputmode="numeric" data-k="bT"><span>px</span></div></div>
-                <div class="field"><label class="k" for="bG">Gap to code</label>
+                <div class="field"><label class="k" for="bG">Gap to QR code</label>
                   <div class="unit"><input id="bG" type="number" min="0" step="1" inputmode="numeric" data-k="bG"><span>px</span></div></div>
                 <div class="field"><label class="k" for="bO">Edge to border</label>
                   <div class="unit"><input id="bO" type="number" min="0" step="1" inputmode="numeric" data-k="bO"><span>px</span></div></div>
@@ -481,7 +481,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
                   <div class="swatch" id="bc-sw"><input id="bc-color" type="color" aria-label="Border colour"></div>
                   <input id="bc-hex" type="text" maxlength="7" spellcheck="false" aria-label="Border hex">
                 </div>
-                <label class="check"><input id="bMatch" type="checkbox" data-k="bMatch"> Same as code</label>
+                <label class="check"><input id="bMatch" type="checkbox" data-k="bMatch"> Same as QR code</label>
               </div>
               <button type="button" class="ghost" id="borderRemove">Remove border</button>
             </div>
@@ -499,7 +499,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
                 <div class="w-body" style="padding:0">
                   <div class="field"><label class="k" for="logoPct">Logo size <span id="logoPctOut" style="color:var(--ink)">20%</span></label>
                     <input id="logoPct" type="range" min="10" max="25" step="1" data-k="logoPct"></div>
-                  <label class="check"><input id="logoClear" type="checkbox" data-k="logoClear"> Clear the code behind the logo</label>
+                  <label class="check"><input id="logoClear" type="checkbox" data-k="logoClear"> Clear the QR code behind the logo</label>
                   <button type="button" class="ghost" id="logoRemove">Remove logo</button>
                 </div>
               </div>
@@ -556,9 +556,9 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     <h2 id="faqh">Free QR code generator, explained</h2>
     <div class="faq-grid">
       <div><h3>Is it actually free?</h3><p>Yes. Every feature, every format, every size. No sign-up, no watermark, no trial, no premium tier waiting to ambush you.</p></div>
-      <div><h3>Do the codes expire?</h3><p>Never. These are static QR codes: the content lives inside the code itself, so there is no subscription keeping it alive.</p></div>
-      <div><h3>What happens to my data?</h3><p>Nothing. The code is generated in your browser. What you type or upload never touches a server and is not stored anywhere.</p></div>
-      <div><h3>Can I add my logo?</h3><p>Yes. Drop a logo in the centre and the code switches to its strongest error correction so it still scans.</p></div>
+      <div><h3>Do the codes expire?</h3><p>Never. These are static QR codes: the content lives inside the QR code itself, so there is no subscription keeping it alive.</p></div>
+      <div><h3>What happens to my data?</h3><p>Nothing. The QR code is generated in your browser. What you type or upload never touches a server and is not stored anywhere.</p></div>
+      <div><h3>Can I add my logo?</h3><p>Yes. Drop a logo in the centre and the QR code switches to its strongest error correction so it still scans.</p></div>
       <div><h3>Can I track scans?</h3><p>Yes, honestly. Add UTM tags to a link and scans show up in your own analytics. No redirect service, no middleman.</p></div>
       <div><h3>What can a QR code hold?</h3><p>Links, text, email, Wi-Fi logins, contact cards, calendar events, phone numbers, SMS, WhatsApp chats and map locations. Download as SVG, PNG, JPG, WEBP or PDF.</p></div>
     </div>
@@ -633,7 +633,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     {name:'Ink, no background', bg:'#ffffff', fg:'#0c0c0b', bgT:true, fgT:false},
     {name:'Cut out of ink', bg:'#0c0c0b', fg:'#ffffff', bgT:false, fgT:true},
   ];
-  const ECC_HINT = {L:'Smallest code, survives 7% damage', M:'Balanced, survives 15% damage', Q:'Sturdy, survives 25% damage', H:'Toughest, survives 30%. Use it if a logo goes on top'};
+  const ECC_HINT = {L:'Smallest QR code, survives 7% damage', M:'Balanced, survives 15% damage', Q:'Sturdy, survives 25% damage', H:'Toughest, survives 30%. Use it if a logo goes on top'};
   const PAD_NAME = {0:'no padding',2:'slim padding',4:'standard padding',6:'roomy padding'};
   const MORE_NAME = {vcard:'Contact',event:'Event',tel:'Phone',sms:'SMS',whatsapp:'WhatsApp',geo:'Location'};
 
@@ -952,7 +952,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     if(document.activeElement!==$('#padPx')) $('#padPx').value=S.padPx;
     $('#padOf').textContent='px each side of a '+S.size+' px image'+(Number(S.padPx)>maxPad()?' (capped at '+maxPad()+')':'');
     $$('[data-fmt]').forEach(b=>b.setAttribute('aria-pressed',String(S.fmts.includes(b.dataset.fmt))));
-    $('#eccHint').textContent=S.logo?'Set to H, the strongest level, so the code still scans with a logo covering part of it':ECC_HINT[S.ecc];
+    $('#eccHint').textContent=S.logo?'Set to H, the strongest level, so the QR code still scans with a logo covering part of it':ECC_HINT[S.ecc];
     let pname='Custom';
     $$('[data-preset]').forEach(b=>{ const p=PRESETS[b.dataset.preset]; const on=p.bg===S.bg&&p.fg===S.fg&&p.bgT===S.bgT&&p.fgT===S.fgT; if(on) pname=p.name; b.setAttribute('aria-pressed',String(on)); });
     $('#colourName').textContent=pname;
@@ -995,12 +995,12 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     const st=$('#state'); st.textContent=stateTxt; st.className='state'+(current?' ready':' busy');
     $('#meta').innerHTML = current
       ? '<span>'+current.n+' × '+current.n+' modules, '+padLabel()+'</span><span>'+utf8(p).length+' bytes</span>'
-      : '<span>'+(shown?'Fix the highlighted field to build your code':blocked?'Keep typing, your code builds once the details check out':'Type something in Content to start')+'</span><span></span>';
+      : '<span>'+(shown?'Fix the highlighted field to build your QR code':blocked?'Keep typing, your QR code builds once the details check out':'Type something in Content to start')+'</span><span></span>';
 
     if(!warn){
       if(S.bgT&&S.fgT) warn='Both colours are transparent, so nothing would show.';
       else if(!S.bgT&&!S.fgT){ const a=lum(S.bg),b=lum(S.fg),r=(Math.max(a,b)+.05)/(Math.min(a,b)+.05); if(r<3) warn='Low contrast. Phones may struggle to scan this.'; }
-      if(!warn && current && S.border){ const fr=frameGeom(current.n); if(fr.gap<2) warn='The border is too close to the code. Leave at least 2 modules (about '+Math.ceil(fr.modPx*2)+' px) or phones may misread it.'; }
+      if(!warn && current && S.border){ const fr=frameGeom(current.n); if(fr.gap<2) warn='The border is too close to the QR code. Leave at least 2 modules (about '+Math.ceil(fr.modPx*2)+' px) or phones may misread it.'; }
       if(!warn && current && noPad()) warn='No padding. Leave space around it in your layout, or scanners can miss it.';
       if(!warn && current && S.fmts.includes('jpg') && (S.bgT||S.fgT)) warn='JPG has no transparency, so transparent parts export as white.';
     }
@@ -1021,7 +1021,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     $$('.copyText').forEach(e=>{ if(!e.parentNode.classList.contains('done')) e.textContent=cl; });
     $$('[data-copy]').forEach(b=>{ b.disabled=!current||multi; b.title=multi?'Copy works with one format at a time. Deselect the others, or download them all as a zip.':cf==='svg'?'Copies the SVG code. Paste it into Figma, Illustrator or your code.':cf==='png'?'Copies a PNG image to your clipboard.':'Clipboards only hold images as PNG, so this copies a PNG that looks like your '+cf.toUpperCase()+'.'; });
     $('#dockTitle').textContent = current ? fileBase()+' · '+S.fmts.map(f=>f.toUpperCase()).join(', ') : stateTxt;
-    $('#dockSub').textContent = warn || (current ? (current.n+' × '+current.n+', '+padLabel()) : 'Your code builds here');
+    $('#dockSub').textContent = warn || (current ? (current.n+' × '+current.n+', '+padLabel()) : 'Your QR code builds here');
   }
 
   /* ---------- inputs ---------- */
