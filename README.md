@@ -23,6 +23,8 @@ A single-page QR code maker for links, plain text, email and Wi-Fi. It exports c
 
 ## Live
 
+**[nobs-qr.vercel.app](https://nobs-qr.vercel.app)**
+
 Deployed on Vercel from the `main` branch. Every push goes live automatically.
 
 ## Use it
