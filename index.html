@@ -1,0 +1,963 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Free QR Code Generator | No BS QR (no sign-up, no watermark)</title>
+<meta name="description" content="Free QR code generator with no sign-up, no watermark and no expiry. Make QR codes for links, Wi-Fi, vCards, events and more, with your logo. Download SVG, PNG, JPG, WEBP or PDF. Runs privately in your browser.">
+<meta name="keywords" content="free QR code generator, QR code generator, QR code maker, free QR code, QR code with logo, Wi-Fi QR code, vCard QR code, SVG QR code, QR code no sign up, QR code that never expires">
+<meta property="og:title" content="No BS QR: Free QR Code Generator">
+<meta property="og:description" content="A free QR code generator with no sign-up, no watermark, no expiry and no tracking. Runs in your browser.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"No BS QR","alternateName":"No BS QR Code Generator","description":"Free QR code generator. No sign-up, no watermark, no expiry. Links, text, email, Wi-Fi, vCard, calendar events, phone, SMS, WhatsApp and location. Optional logo and UTM tracking. Exports SVG, PNG, JPG, WEBP and PDF.","applicationCategory":"DesignApplication","operatingSystem":"Any (web browser)","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"creator":{"@type":"Organization","name":"Jomiro Eming Design Lab","url":"https://jomiro.de"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is this QR code generator really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every feature is free, with no sign-up, no watermark, no trial and no premium tier."}},
+{"@type":"Question","name":"Do the QR codes expire?","acceptedAnswer":{"@type":"Answer","text":"No. These are static QR codes: the content is stored in the code itself, so they work for as long as the printed code exists."}},
+{"@type":"Question","name":"Is my data safe?","acceptedAnswer":{"@type":"Answer","text":"Yes. The QR code is generated in your browser. Nothing you type or upload is sent to a server or stored."}},
+{"@type":"Question","name":"Can I add a logo to my QR code?","acceptedAnswer":{"@type":"Answer","text":"Yes. Add a logo in the centre and error correction is raised automatically so the code still scans."}},
+{"@type":"Question","name":"Can I track QR code scans?","acceptedAnswer":{"@type":"Answer","text":"Yes, with UTM parameters on links. Scans show up in your own analytics, such as Google Analytics or Plausible, with no redirect service in between."}},
+{"@type":"Question","name":"Which file formats can I download?","acceptedAnswer":{"@type":"Answer","text":"SVG, PNG, JPG, WEBP and PDF. Pick several and they download together as one zip file."}}]}</script>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201000%201000%22%3E%3Cpath%20fill%3D%22%230c0c0b%22%20fill-rule%3D%22evenodd%22%20d%3D%22M10%200H990Q1000%200%201000%2010V990Q1000%201000%20990%201000H10Q0%201000%200%20990V10Q0%200%2010%200ZM100%20335.96V100H192.8L339.54%20198.43Q342.13%20200.15%20346.88%20203.58Q351.63%20207.01%20356.81%20210.78Q361.99%20214.55%20366.3%20217.64H370.62Q370.62%20212.84%20370.62%20204.78Q370.62%20196.72%20370.62%20189.17V100H470.75V335.96H378.82L239.41%20243.02Q230.35%20237.19%20220.2%20229.98Q210.06%20222.78%20204.02%20218.32H200.13Q200.13%20223.12%20200.13%20231.87Q200.13%20240.62%20200.13%20249.53V335.96Z%20M701.89%20340.08Q641.04%20340.08%20596.58%20325.33Q552.12%20310.58%20527.95%20283.31Q503.78%20256.05%20503.78%20217.98Q503.78%20179.91%20527.95%20152.47Q552.12%20125.04%20596.58%20110.46Q641.04%2095.88%20701.89%2095.88Q763.18%2095.88%20807.42%20110.46Q851.66%20125.04%20875.83%20152.47Q900%20179.91%20900%20217.98Q900%20256.05%20875.83%20283.31Q851.66%20310.58%20807.42%20325.33Q763.18%20340.08%20701.89%20340.08ZM701.89%20281.43Q722.18%20281.43%20738.58%20277.14Q754.98%20272.85%20766.63%20264.79Q778.29%20256.73%20784.33%20245.76Q790.37%20234.79%20790.37%20221.75V213.52Q790.37%20200.49%20784.33%20189.69Q778.29%20178.88%20766.63%20170.99Q754.98%20163.11%20738.58%20158.82Q722.18%20154.53%20701.89%20154.53Q681.61%20154.53%20665.21%20158.82Q648.8%20163.11%20637.15%20170.99Q625.5%20178.88%20619.46%20189.69Q613.41%20200.49%20613.41%20213.52V221.75Q613.41%20234.79%20619.46%20245.76Q625.5%20256.73%20637.15%20264.79Q648.8%20272.85%20665.21%20277.14Q681.61%20281.43%20701.89%20281.43Z%20M100%20595.52V359.56H381.57Q408.59%20359.56%20430.63%20366.93Q452.67%20374.3%20465.71%20387.34Q478.74%20400.37%20478.74%20417.52Q478.74%20434.67%20470.68%20445.64Q462.63%20456.61%20449.12%20462.96Q435.61%20469.3%20419.49%20472.39V473.76Q437.98%20476.51%20453.15%20483.19Q468.31%20489.88%20477.32%20501.89Q486.33%20513.89%20486.33%20532.75Q486.33%20551.62%20472.82%20565.68Q459.31%20579.74%20436.08%20587.63Q412.85%20595.52%20384.41%20595.52ZM217.08%20540.64H337.48Q350.28%20540.64%20358.34%20535.15Q366.4%20529.67%20366.4%20518.69Q366.4%20513.55%20362.84%20509.26Q359.29%20504.97%20352.65%20502.57Q346.02%20500.17%20337.48%20500.17H217.08ZM217.08%20451.47H329.9Q338.91%20451.47%20345.31%20448.9Q351.71%20446.33%20355.26%20441.52Q358.82%20436.72%20358.82%20429.52Q358.82%20421.98%20350.28%20416.66Q341.75%20411.34%20329.9%20411.34H217.08Z%20M720.82%20599.63Q678.63%20599.63%20642.13%20596.03Q605.63%20592.43%20578.14%20583.68Q550.65%20574.94%20535%20559.33Q519.36%20543.73%20519.36%20520.06Q519.36%20519.38%20519.36%20518.18Q519.36%20516.98%20519.84%20515.6H634.07Q633.6%20516.98%20633.6%20518.18Q633.6%20519.38%20633.6%20520.41Q633.6%20530.7%20643.08%20536.18Q652.56%20541.67%20669.63%20543.56Q686.69%20545.44%20708.97%20545.44Q717.98%20545.44%20727.69%20545.27Q737.41%20545.1%20746.65%20544.24Q755.9%20543.39%20763.25%20541.67Q770.59%20539.96%20775.1%20537.04Q779.6%20534.13%20779.6%20529.67Q779.6%20523.49%20768.93%20520.06Q758.27%20516.63%20740.02%20514.75Q721.77%20512.86%20699.25%20511.15Q676.74%20509.43%20652.56%20506.69Q628.39%20503.94%20605.87%20498.97Q583.35%20494%20565.1%20485.42Q546.85%20476.85%20536.19%20463.47Q525.52%20450.1%20525.52%20430.89Q525.52%20410.31%20540.46%20395.91Q555.39%20381.51%20580.98%20372.59Q606.58%20363.67%20639.76%20359.56Q672.94%20355.44%20708.97%20355.44Q745.94%20355.44%20778.41%20359.38Q810.88%20363.33%20835.77%20371.9Q860.66%20380.48%20874.88%20394.37Q889.1%20408.26%20889.1%20428.15V432.26H775.81V430.89Q775.81%20424.03%20769.64%20418.72Q763.48%20413.4%20749.74%20410.14Q735.99%20406.89%20713.71%20406.89Q690.96%20406.89%20675.79%20408.94Q660.62%20411%20653.27%20414.6Q645.92%20418.2%20645.92%20422.32Q645.92%20428.49%20656.59%20431.92Q667.26%20435.35%20685.51%20437.24Q703.76%20439.12%20726.27%20440.84Q748.79%20442.55%20772.96%20445.13Q797.14%20447.7%20819.65%20452.33Q842.17%20456.96%20860.42%20465.19Q878.67%20473.42%20889.33%20486.11Q900%20498.8%20900%20517.32Q900%20546.47%20876.54%20564.65Q853.07%20582.83%20812.54%20591.23Q772.01%20599.63%20720.82%20599.63Z%20M348.55%20900%20292.83%20858.84Q292.39%20858.84%20291.31%20858.84Q290.22%20858.84%20288.04%20858.84Q232.76%20858.84%20190.32%20844.27Q147.88%20829.69%20123.94%20802.43Q100%20775.16%20100%20737.09Q100%20699.02%20124.38%20671.59Q148.75%20644.15%20193.59%20629.57Q238.42%20615%20299.79%20615Q361.6%20615%20406.22%20629.57Q450.84%20644.15%20475.21%20671.59Q499.59%20699.02%20499.59%20737.09Q499.59%20775.85%20474.34%20803.46Q449.1%20831.06%20403.39%20845.47L486.53%20900ZM299.79%20800.54Q320.25%20800.54%20336.79%20796.25Q353.33%20791.97%20365.09%20783.91Q376.84%20775.85%20382.93%20764.87Q389.03%20753.9%20389.03%20740.86V732.63Q389.03%20719.6%20382.93%20708.8Q376.84%20697.99%20365.09%20690.11Q353.33%20682.22%20336.79%20677.93Q320.25%20673.64%20299.79%20673.64Q279.34%20673.64%20262.8%20677.93Q246.25%20682.22%20234.5%20690.11Q222.75%20697.99%20216.66%20708.8Q210.56%20719.6%20210.56%20732.63V740.86Q210.56%20753.9%20216.66%20764.87Q222.75%20775.85%20234.5%20783.91Q246.25%20791.97%20262.8%20796.25Q279.34%20800.54%20299.79%20800.54Z%20M532.62%20855.07V619.11H792.05Q825.57%20619.11%20847.98%20630.09Q870.4%20641.06%20881.72%20658.9Q893.04%20676.73%20893.04%20697.31Q893.04%20720.97%20879.76%20739.32Q866.48%20757.67%20840.8%20768.64L900%20855.07H778.56L733.29%20781.33H640.14V855.07ZM640.14%20722.69H754.18Q766.37%20722.69%20774.64%20716.69Q782.91%20710.68%20782.91%20700.05Q782.91%20692.85%20778.99%20687.88Q775.07%20682.9%20768.76%20680.33Q762.45%20677.76%20754.18%20677.76H640.14Z%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Geist+Mono:wght@400;500;600&display=swap">
+<style>
+/* Layout: bordered widgets on the left in a two-column grid; a sticky preview widget on the right. Phones get a sticky dock at the bottom instead. */
+:root{
+  --paper:#fafaf8;
+  --card:#ffffff;
+  --bone:#f0efeb;
+  --ash:#dddbd6;
+  --stone:#8c8a84;
+  --graphite:#3b3a37;
+  --ink:#0c0c0b;
+  --wide:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --mono:"Geist Mono","SFMono-Regular",Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){--paper:#0d0d0c;--card:#141413;--bone:#1c1c1a;--ash:#2e2d2a;--stone:#8a8882;--graphite:#c9c7c1;--ink:#f3f2ee;color-scheme:dark}
+}
+:root[data-theme="dark"]{--paper:#0d0d0c;--card:#141413;--bone:#1c1c1a;--ash:#2e2d2a;--stone:#8a8882;--graphite:#c9c7c1;--ink:#f3f2ee;color-scheme:dark}
+
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--mono);font-size:12px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.wrap{padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:28px 32px;max-width:1680px;margin:0 auto}
+a{color:inherit}
+
+/* Header */
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 40px;margin-bottom:28px}
+.brand{min-width:0;display:flex;align-items:center;gap:clamp(16px,2.4vw,32px)}
+.logo{flex:none;line-height:0}
+.stamp{width:clamp(88px,9vw,132px);height:auto;color:var(--ink);display:block}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.eyebrow{margin:0 0 10px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--stone)}
+.lead{margin:0;font-family:var(--wide);font-stretch:125%;font-weight:800;font-size:clamp(16px,1.9vw,28px);letter-spacing:-.01em;text-transform:uppercase;line-height:1.08}
+.lead .ln{display:block;white-space:nowrap}
+@media (max-width:640px){
+  .brand{display:grid;grid-template-columns:64px minmax(0,1fr);align-items:center;gap:14px 14px}
+  .brand>div:not(.logo){display:contents}
+  .stamp{width:64px}
+  .eyebrow{margin:0;font-size:12px;line-height:1.4}
+  .lead{grid-column:1 / -1;font-size:clamp(24px,7.4vw,32px);line-height:1.02;text-wrap:balance}
+  .lead .ln{display:inline;white-space:normal}
+  .sub{grid-column:1 / -1;margin:0}
+  .sub span{display:inline}
+}
+.sub{margin:8px 0 0;font-size:13px;color:var(--graphite);max-width:none;text-wrap:balance}
+.sub span{display:block}
+.nw{white-space:nowrap}
+
+/* Layout */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(340px,440px);gap:20px;align-items:start}
+.widgets{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;min-width:0}
+.w{background:var(--card);border:1px solid var(--ink);min-width:0;display:flex;flex-direction:column}
+.w.span{grid-column:1 / -1}
+.w-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-bottom:1px solid var(--ash)}
+.w-head h2{margin:0;display:flex;align-items:center;gap:10px;font-family:var(--wide);font-stretch:125%;font-weight:700;font-size:13px;letter-spacing:.04em;text-transform:uppercase}
+.w-head h2 span{font-family:var(--mono);font-weight:500;font-size:10px;color:var(--paper);background:var(--ink);width:18px;height:18px;display:grid;place-items:center;letter-spacing:0}
+.w-head small{font-size:10px;color:var(--stone)}
+.w-body{padding:16px;display:grid;gap:14px}
+
+/* Fields */
+.field{display:grid;gap:5px}
+.k{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--stone)}
+.typebar{position:relative}
+.more-btn::after{content:" ▾"}
+.menu{position:absolute;right:0;top:calc(100% + 6px);z-index:20;width:min(300px,100%);background:var(--card);border:1px solid var(--ink);box-shadow:0 18px 40px -20px rgba(0,0,0,.35);display:grid}
+.menu button{font:inherit;text-align:left;background:none;border:0;color:var(--ink);padding:11px 14px;cursor:pointer;display:grid;gap:1px}
+.menu button+button{border-top:1px solid var(--ash)}
+.menu button:hover,.menu button:focus-visible,.menu button[aria-current=true]{background:var(--bone);outline:none}
+.menu button b{font-weight:500;font-size:12px}
+.menu button span{font-size:10px;color:var(--stone)}
+.note{font-size:10px;color:var(--stone);margin:0}
+.logo-row{display:grid;grid-template-columns:52px minmax(0,1fr) auto;align-items:center;gap:12px}
+.logo-prev{width:52px;height:52px;border:1px solid var(--ash);background-color:#fff;background-image:conic-gradient(#ecebe7 25%,#fff 0 50%,#ecebe7 0 75%,#fff 0);background-size:8px 8px;display:grid;place-items:center;overflow:hidden}
+.logo-prev img{max-width:80%;max-height:80%;display:block}
+.logo-name{font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.filebtn{font:inherit;font-size:11px;border:1px solid var(--ink);padding:8px 12px;cursor:pointer;background:none;color:var(--ink);white-space:nowrap}
+.filebtn:hover{background:var(--bone)}
+input[type=file]{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+input[type=range]{width:100%;accent-color:var(--ink);margin:0}
+.seg button:disabled{opacity:.35;cursor:not-allowed}
+input[type=text],input[type=url],input[type=email],input[type=tel],input[type=date],input[type=time],textarea,select{
+  width:100%;font:inherit;font-size:13px;color:var(--ink);background:var(--paper);border:1px solid var(--ash);border-radius:0;padding:10px 12px;outline:none;transition:border-color .15s
+}
+textarea{resize:vertical;min-height:84px}
+select{appearance:none;cursor:pointer;padding-right:30px;background-image:linear-gradient(45deg,transparent 50%,var(--ink) 50%),linear-gradient(-45deg,transparent 50%,var(--ink) 50%);background-size:5px 5px;background-position:calc(100% - 17px) 55%,calc(100% - 12px) 55%;background-repeat:no-repeat}
+select option{background:var(--paper);color:var(--ink)}
+input:focus-visible,textarea:focus-visible,select:focus-visible{border-color:var(--ink)}
+::placeholder{color:var(--stone);opacity:.8}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+.seg{display:grid;grid-auto-flow:column;grid-auto-columns:1fr;border:1px solid var(--ink)}
+.seg button,.chip{font:inherit;font-size:11px;background:transparent;color:var(--ink);border:0;padding:9px 6px;cursor:pointer;transition:background .15s,color .15s;white-space:nowrap}
+.seg button+button{border-left:1px solid var(--ink)}
+.seg button[aria-pressed=true],.chip[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+.seg button:hover:not([aria-pressed=true]),.chip:hover:not([aria-pressed=true]){background:var(--bone)}
+button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--ink);padding:8px 12px}
+
+.padcustom{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:10px;font-size:11px;color:var(--stone)}
+.padcustom input{width:100%;font:inherit;font-size:13px;color:var(--ink);background:var(--paper);border:1px solid var(--ink);border-radius:0;padding:8px 10px;outline:none;font-variant-numeric:tabular-nums}
+.check{display:flex;align-items:center;gap:8px;font-size:11px;cursor:pointer;user-select:none}
+.check input{appearance:none;width:14px;height:14px;border:1px solid var(--ink);margin:0;cursor:pointer;border-radius:0;flex:none}
+.check input:checked{background:var(--ink)}
+.check input:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+/* Presets */
+.presets{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px}
+.preset{aspect-ratio:1;border:1px solid var(--ash);padding:0;cursor:pointer;display:grid;place-items:center;background:none}
+.preset[aria-pressed=true]{outline:2px solid var(--ink);outline-offset:2px}
+.preset svg{width:58%;height:58%}
+.preset.tr{background-color:#fff;background-image:conic-gradient(#e7e6e2 25%,#fff 0 50%,#e7e6e2 0 75%,#fff 0);background-size:8px 8px}
+
+/* Optional extras: grey bars that read as buttons without competing with the black primary actions */
+summary{cursor:pointer;font-size:12px;font-weight:500;color:var(--ink);list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--bone);border:1px solid var(--ash);padding:11px 14px;transition:background .15s,border-color .15s}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:16px;line-height:1;font-weight:400}
+summary:hover{border-color:var(--stone)}
+summary:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+details[open] summary{border-bottom-color:transparent}
+details[open] summary::after{content:"−"}
+details .inner{display:grid;gap:14px;border:1px solid var(--ash);border-top:0;padding:14px}
+summary .on{font-size:10px;font-weight:500;background:var(--ink);color:var(--paper);padding:2px 7px;margin-left:auto}
+.colours{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.colour{display:grid;grid-template-columns:38px minmax(0,1fr);gap:8px}
+.swatch{position:relative;width:38px;height:38px;border:1px solid var(--ash);overflow:hidden}
+.swatch input{position:absolute;inset:-8px;width:calc(100% + 16px);height:calc(100% + 16px);border:0;padding:0;cursor:pointer;background:none}
+.swatch.off::after{content:"";position:absolute;inset:0;background:linear-gradient(to top right,transparent calc(50% - .5px),var(--ink) calc(50% - .5px),var(--ink) calc(50% + .5px),transparent calc(50% + .5px)),var(--paper);pointer-events:none}
+.colour input[type=text]{text-transform:uppercase;letter-spacing:.06em;padding:9px 10px}
+.colour input[type=text]:disabled{color:var(--stone)}
+
+/* Preview widget */
+.preview{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 16px)}
+.state{display:inline-flex;align-items:center;gap:7px;font-size:10px;color:var(--stone)}
+.state::before{content:"";width:7px;height:7px;background:var(--stone)}
+.state.ready{color:var(--ink)}
+.state.ready::before{background:var(--ink)}
+.state.busy::before{animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:0}}
+.stage{background:var(--bone);padding:28px;display:grid;place-items:center}
+.frame{width:100%;max-width:360px;aspect-ratio:1;position:relative;display:grid;place-items:center}
+.frame.checker{background-color:#fff;background-image:conic-gradient(#e7e6e2 25%,#fff 0 50%,#e7e6e2 0 75%,#fff 0);background-size:16px 16px}
+.frame svg,.frame canvas{width:100%;height:100%;display:block}
+.frame svg.build{animation:build .5s steps(10) both}
+@keyframes build{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+.meta{display:flex;justify-content:space-between;gap:12px;font-size:10px;color:var(--stone);padding:10px 16px;border-top:1px solid var(--ash);font-variant-numeric:tabular-nums}
+.warn{font-size:11px;padding:10px 16px;border-top:1px solid var(--ash);background:var(--paper)}
+.warn::before{content:"! ";font-weight:600}
+.dl-area{padding:16px;border-top:1px solid var(--ink);display:grid;gap:10px}
+.primary{font:inherit;font-family:var(--wide);font-stretch:125%;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:var(--ink);color:var(--paper);border:1px solid var(--ink);padding:16px 18px;cursor:pointer;display:flex;justify-content:space-between;align-items:center;width:100%}
+.primary:hover:not(:disabled){background:var(--graphite)}
+.primary:disabled{opacity:.3;cursor:not-allowed}
+.ghost{font:inherit;font-size:11px;background:none;border:0;color:var(--graphite);padding:2px 0;cursor:pointer;justify-self:start;border-bottom:1px solid var(--ash)}
+.ghost:hover{border-bottom-color:var(--ink)}
+.status{font-size:11px;color:var(--stone);min-height:1.5em}
+
+.faq{margin-top:48px;padding-top:20px;border-top:1px solid var(--ink)}
+.faq h2{margin:0 0 20px;font-family:var(--wide);font-stretch:125%;font-weight:800;font-size:clamp(18px,2vw,24px);text-transform:uppercase;letter-spacing:-.01em;text-wrap:balance}
+.faq-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px 32px}
+.faq h3{margin:0 0 6px;font-size:12px;font-weight:600}
+.faq p{margin:0;font-size:12px;color:var(--graphite);max-width:52ch}
+footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 32px;font-size:11px;color:var(--stone)}
+.credit{display:inline-flex;align-items:center;gap:10px;color:var(--ink);text-decoration:none}
+.credit .mark{width:28px;height:28px;display:grid;place-items:center;border:1px solid var(--ink);font-size:9px}
+.credit .mark svg{width:100%;height:100%}
+.credit:hover .who{text-decoration:underline;text-underline-offset:3px}
+.credit .by{color:var(--stone)}
+.gh{display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;border:1px solid var(--ink);padding:7px 12px}
+.gh:hover{background:var(--bone)}
+
+/* Phone dock */
+.dock{display:none}
+@media (max-width:900px){
+  .layout{grid-template-columns:1fr}
+  .preview{display:none}
+  .widgets{grid-template-columns:1fr}
+  .wrap{padding-bottom:calc(120px + env(safe-area-inset-bottom, 0px))}
+  .dock{display:grid;position:fixed;left:0;right:0;bottom:0;z-index:10;background:var(--card);border-top:1px solid var(--ink);
+    padding:10px max(16px, env(safe-area-inset-right, 0px)) calc(10px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px));
+    grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px}
+  .dock .thumb{width:64px;height:64px;padding:0;border:1px solid var(--ash);background:var(--bone);cursor:pointer;display:grid;place-items:center;transition:width .25s,height .25s}
+  .dock .thumb.checker{background-color:#fff;background-image:conic-gradient(#e7e6e2 25%,#fff 0 50%,#e7e6e2 0 75%,#fff 0);background-size:8px 8px}
+  .dock .thumb svg,.dock .thumb canvas{width:100%;height:100%;display:block}
+  .dock .info{min-width:0;display:grid;gap:2px;font-size:11px}
+  .dock .info b{font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dock .info span{color:var(--stone);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .dock .primary{width:auto;padding:14px 16px;font-size:12px;gap:10px}
+  .dock.big{grid-template-columns:1fr auto}
+  .dock.big .thumb{grid-column:1 / -1;width:min(72vw,300px);height:min(72vw,300px);justify-self:center}
+}
+@media (max-width:520px){
+  .presets{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .colours{grid-template-columns:1fr}
+  .seg button{font-size:10px;padding:9px 3px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <div class="brand">
+        <div class="logo" role="img" aria-label="No BS QR logo"><svg xmlns="http://www.w3.org/2000/svg" class="stamp" role="img" aria-hidden="true" focusable="false" viewBox="0 0 1000 1000"><path fill="currentColor" fill-rule="evenodd" d="M10 0H990Q1000 0 1000 10V990Q1000 1000 990 1000H10Q0 1000 0 990V10Q0 0 10 0ZM56 56V944H944V56ZM100 335.96V100H192.8L339.54 198.43Q342.13 200.15 346.88 203.58Q351.63 207.01 356.81 210.78Q361.99 214.55 366.3 217.64H370.62Q370.62 212.84 370.62 204.78Q370.62 196.72 370.62 189.17V100H470.75V335.96H378.82L239.41 243.02Q230.35 237.19 220.2 229.98Q210.06 222.78 204.02 218.32H200.13Q200.13 223.12 200.13 231.87Q200.13 240.62 200.13 249.53V335.96Z M701.89 340.08Q641.04 340.08 596.58 325.33Q552.12 310.58 527.95 283.31Q503.78 256.05 503.78 217.98Q503.78 179.91 527.95 152.47Q552.12 125.04 596.58 110.46Q641.04 95.88 701.89 95.88Q763.18 95.88 807.42 110.46Q851.66 125.04 875.83 152.47Q900 179.91 900 217.98Q900 256.05 875.83 283.31Q851.66 310.58 807.42 325.33Q763.18 340.08 701.89 340.08ZM701.89 281.43Q722.18 281.43 738.58 277.14Q754.98 272.85 766.63 264.79Q778.29 256.73 784.33 245.76Q790.37 234.79 790.37 221.75V213.52Q790.37 200.49 784.33 189.69Q778.29 178.88 766.63 170.99Q754.98 163.11 738.58 158.82Q722.18 154.53 701.89 154.53Q681.61 154.53 665.21 158.82Q648.8 163.11 637.15 170.99Q625.5 178.88 619.46 189.69Q613.41 200.49 613.41 213.52V221.75Q613.41 234.79 619.46 245.76Q625.5 256.73 637.15 264.79Q648.8 272.85 665.21 277.14Q681.61 281.43 701.89 281.43Z M100 595.52V359.56H381.57Q408.59 359.56 430.63 366.93Q452.67 374.3 465.71 387.34Q478.74 400.37 478.74 417.52Q478.74 434.67 470.68 445.64Q462.63 456.61 449.12 462.96Q435.61 469.3 419.49 472.39V473.76Q437.98 476.51 453.15 483.19Q468.31 489.88 477.32 501.89Q486.33 513.89 486.33 532.75Q486.33 551.62 472.82 565.68Q459.31 579.74 436.08 587.63Q412.85 595.52 384.41 595.52ZM217.08 540.64H337.48Q350.28 540.64 358.34 535.15Q366.4 529.67 366.4 518.69Q366.4 513.55 362.84 509.26Q359.29 504.97 352.65 502.57Q346.02 500.17 337.48 500.17H217.08ZM217.08 451.47H329.9Q338.91 451.47 345.31 448.9Q351.71 446.33 355.26 441.52Q358.82 436.72 358.82 429.52Q358.82 421.98 350.28 416.66Q341.75 411.34 329.9 411.34H217.08Z M720.82 599.63Q678.63 599.63 642.13 596.03Q605.63 592.43 578.14 583.68Q550.65 574.94 535 559.33Q519.36 543.73 519.36 520.06Q519.36 519.38 519.36 518.18Q519.36 516.98 519.84 515.6H634.07Q633.6 516.98 633.6 518.18Q633.6 519.38 633.6 520.41Q633.6 530.7 643.08 536.18Q652.56 541.67 669.63 543.56Q686.69 545.44 708.97 545.44Q717.98 545.44 727.69 545.27Q737.41 545.1 746.65 544.24Q755.9 543.39 763.25 541.67Q770.59 539.96 775.1 537.04Q779.6 534.13 779.6 529.67Q779.6 523.49 768.93 520.06Q758.27 516.63 740.02 514.75Q721.77 512.86 699.25 511.15Q676.74 509.43 652.56 506.69Q628.39 503.94 605.87 498.97Q583.35 494 565.1 485.42Q546.85 476.85 536.19 463.47Q525.52 450.1 525.52 430.89Q525.52 410.31 540.46 395.91Q555.39 381.51 580.98 372.59Q606.58 363.67 639.76 359.56Q672.94 355.44 708.97 355.44Q745.94 355.44 778.41 359.38Q810.88 363.33 835.77 371.9Q860.66 380.48 874.88 394.37Q889.1 408.26 889.1 428.15V432.26H775.81V430.89Q775.81 424.03 769.64 418.72Q763.48 413.4 749.74 410.14Q735.99 406.89 713.71 406.89Q690.96 406.89 675.79 408.94Q660.62 411 653.27 414.6Q645.92 418.2 645.92 422.32Q645.92 428.49 656.59 431.92Q667.26 435.35 685.51 437.24Q703.76 439.12 726.27 440.84Q748.79 442.55 772.96 445.13Q797.14 447.7 819.65 452.33Q842.17 456.96 860.42 465.19Q878.67 473.42 889.33 486.11Q900 498.8 900 517.32Q900 546.47 876.54 564.65Q853.07 582.83 812.54 591.23Q772.01 599.63 720.82 599.63Z M348.55 900 292.83 858.84Q292.39 858.84 291.31 858.84Q290.22 858.84 288.04 858.84Q232.76 858.84 190.32 844.27Q147.88 829.69 123.94 802.43Q100 775.16 100 737.09Q100 699.02 124.38 671.59Q148.75 644.15 193.59 629.57Q238.42 615 299.79 615Q361.6 615 406.22 629.57Q450.84 644.15 475.21 671.59Q499.59 699.02 499.59 737.09Q499.59 775.85 474.34 803.46Q449.1 831.06 403.39 845.47L486.53 900ZM299.79 800.54Q320.25 800.54 336.79 796.25Q353.33 791.97 365.09 783.91Q376.84 775.85 382.93 764.87Q389.03 753.9 389.03 740.86V732.63Q389.03 719.6 382.93 708.8Q376.84 697.99 365.09 690.11Q353.33 682.22 336.79 677.93Q320.25 673.64 299.79 673.64Q279.34 673.64 262.8 677.93Q246.25 682.22 234.5 690.11Q222.75 697.99 216.66 708.8Q210.56 719.6 210.56 732.63V740.86Q210.56 753.9 216.66 764.87Q222.75 775.85 234.5 783.91Q246.25 791.97 262.8 796.25Q279.34 800.54 299.79 800.54Z M532.62 855.07V619.11H792.05Q825.57 619.11 847.98 630.09Q870.4 641.06 881.72 658.9Q893.04 676.73 893.04 697.31Q893.04 720.97 879.76 739.32Q866.48 757.67 840.8 768.64L900 855.07H778.56L733.29 781.33H640.14V855.07ZM640.14 722.69H754.18Q766.37 722.69 774.64 716.69Q782.91 710.68 782.91 700.05Q782.91 692.85 778.99 687.88Q775.07 682.9 768.76 680.33Q762.45 677.76 754.18 677.76H640.14Z"/></svg></div>
+        <div>
+          <h1 class="vh">Free QR code generator: No BS QR</h1>
+          <p class="eyebrow" aria-hidden="true">Free QR code generator</p>
+          <p class="lead"><span class="ln">Your new favourite</span> <span class="ln">no bullshit QR code generator.</span></p>
+          <p class="sub"><span>No shitty branding, no hidden fees, no sign-up, no expiry.</span> <span>Make your QR code and get on with your day.</span></p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="layout">
+    <main class="widgets">
+      <!-- 1. Content -->
+      <section class="w span" aria-labelledby="h1w">
+        <div class="w-head"><h2 id="h1w"><span>1</span>Content</h2><small>What the code opens</small></div>
+        <div class="w-body">
+          <div class="typebar">
+            <div class="seg" role="group" aria-label="Content type">
+              <button type="button" data-type="url" aria-pressed="true">Link</button>
+              <button type="button" data-type="text" aria-pressed="false">Text</button>
+              <button type="button" data-type="email" aria-pressed="false">Email</button>
+              <button type="button" data-type="wifi" aria-pressed="false">Wi-Fi</button>
+              <button type="button" class="more-btn" id="moreBtn" aria-haspopup="true" aria-expanded="false" aria-pressed="false">More</button>
+            </div>
+            <div class="menu" id="moreMenu" hidden>
+              <button type="button" data-more="vcard"><b>Contact card</b><span>Saves a name, number and email to the phone</span></button>
+              <button type="button" data-more="event"><b>Calendar event</b><span>Adds a date and time to the calendar</span></button>
+              <button type="button" data-more="tel"><b>Phone call</b><span>Dials a number</span></button>
+              <button type="button" data-more="sms"><b>SMS</b><span>Opens a text with a message ready</span></button>
+              <button type="button" data-more="whatsapp"><b>WhatsApp</b><span>Opens a chat with a message ready</span></button>
+              <button type="button" data-more="geo"><b>Location</b><span>Opens maps at an address or pin</span></button>
+            </div>
+          </div>
+          <div data-pane="url">
+            <div class="w-body" style="padding:0">
+              <input id="f-url" type="url" data-k="url" placeholder="Paste a link, e.g. example.com" aria-label="Web address" autocomplete="off" spellcheck="false">
+              <details id="utmBox">
+                <summary>Add tracking (UTM)</summary>
+                <div class="inner">
+                  <div class="row2">
+                    <div class="field"><label class="k" for="f-utm-source">Source</label>
+                      <input id="f-utm-source" type="text" data-k="utmSource" placeholder="poster" spellcheck="false"></div>
+                    <div class="field"><label class="k" for="f-utm-medium">Medium</label>
+                      <input id="f-utm-medium" type="text" data-k="utmMedium" placeholder="qr" spellcheck="false"></div>
+                  </div>
+                  <div class="row2">
+                    <div class="field"><label class="k" for="f-utm-campaign">Campaign</label>
+                      <input id="f-utm-campaign" type="text" data-k="utmCampaign" placeholder="autumn-launch" spellcheck="false"></div>
+                    <div class="field"><label class="k" for="f-utm-content">Content (optional)</label>
+                      <input id="f-utm-content" type="text" data-k="utmContent" placeholder="a5-flyer" spellcheck="false"></div>
+                  </div>
+                  <p class="note">Scans show up in the analytics the destination site already uses, such as Google Analytics or Plausible. Nothing is counted here.</p>
+                </div>
+              </details>
+            </div>
+          </div>
+
+          <div data-pane="vcard" hidden>
+            <div class="w-body" style="padding:0">
+              <div class="row2">
+                <div class="field"><label class="k" for="f-v-first">First name</label><input id="f-v-first" type="text" data-k="vFirst" autocomplete="off"></div>
+                <div class="field"><label class="k" for="f-v-last">Last name</label><input id="f-v-last" type="text" data-k="vLast" autocomplete="off"></div>
+              </div>
+              <div class="row2">
+                <div class="field"><label class="k" for="f-v-org">Company</label><input id="f-v-org" type="text" data-k="vOrg" autocomplete="off"></div>
+                <div class="field"><label class="k" for="f-v-title">Job title</label><input id="f-v-title" type="text" data-k="vTitle" autocomplete="off"></div>
+              </div>
+              <div class="row2">
+                <div class="field"><label class="k" for="f-v-tel">Phone</label><input id="f-v-tel" type="tel" data-k="vTel" placeholder="+49 40 1234567" autocomplete="off"></div>
+                <div class="field"><label class="k" for="f-v-email">Email</label><input id="f-v-email" type="email" data-k="vEmail" autocomplete="off" spellcheck="false"></div>
+              </div>
+              <div class="field"><label class="k" for="f-v-url">Website</label><input id="f-v-url" type="url" data-k="vUrl" placeholder="example.com" autocomplete="off" spellcheck="false"></div>
+            </div>
+          </div>
+
+          <div data-pane="event" hidden>
+            <div class="w-body" style="padding:0">
+              <div class="field"><label class="k" for="f-ev-title">Event name</label><input id="f-ev-title" type="text" data-k="evTitle" autocomplete="off"></div>
+              <div class="field"><label class="k" for="f-ev-loc">Location (optional)</label><input id="f-ev-loc" type="text" data-k="evLoc" autocomplete="off"></div>
+              <div class="row2">
+                <div class="field"><label class="k" for="f-ev-date">Date</label><input id="f-ev-date" type="date" data-k="evDate"></div>
+                <label class="check" style="align-self:end;padding-bottom:12px"><input id="f-ev-allday" type="checkbox" data-k="evAllDay"> All day</label>
+              </div>
+              <div class="row2" id="evTimes">
+                <div class="field"><label class="k" for="f-ev-start">Starts</label><input id="f-ev-start" type="time" data-k="evStart"></div>
+                <div class="field"><label class="k" for="f-ev-end">Ends</label><input id="f-ev-end" type="time" data-k="evEnd"></div>
+              </div>
+            </div>
+          </div>
+
+          <div data-pane="tel" hidden>
+            <div class="field"><label class="k" for="f-tel">Phone number</label>
+              <input id="f-tel" type="tel" data-k="tel" placeholder="+49 40 1234567" autocomplete="off"></div>
+          </div>
+
+          <div data-pane="sms" hidden>
+            <div class="w-body" style="padding:0">
+              <div class="field"><label class="k" for="f-sms-num">Phone number</label><input id="f-sms-num" type="tel" data-k="smsNum" placeholder="+49 151 2345678" autocomplete="off"></div>
+              <div class="field"><label class="k" for="f-sms-msg">Message (optional)</label><textarea id="f-sms-msg" data-k="smsMsg"></textarea></div>
+            </div>
+          </div>
+
+          <div data-pane="whatsapp" hidden>
+            <div class="w-body" style="padding:0">
+              <div class="field"><label class="k" for="f-wa-num">Number with country code</label><input id="f-wa-num" type="tel" data-k="waNum" placeholder="+49 151 2345678" autocomplete="off"></div>
+              <div class="field"><label class="k" for="f-wa-msg">Message (optional)</label><textarea id="f-wa-msg" data-k="waMsg"></textarea></div>
+            </div>
+          </div>
+
+          <div data-pane="geo" hidden>
+            <div class="field"><label class="k" for="f-geo">Address or coordinates</label>
+              <input id="f-geo" type="text" data-k="geo" placeholder="A street address, or 53.5511, 9.9937" autocomplete="off"></div>
+          </div>
+          <div data-pane="text" hidden>
+            <textarea id="f-text" data-k="text" placeholder="Anything you want the code to say" aria-label="Text"></textarea>
+          </div>
+          <div data-pane="email" hidden>
+            <div class="w-body" style="padding:0">
+              <div class="field"><label class="k" for="f-email-to">To</label>
+                <input id="f-email-to" type="email" data-k="emailTo" placeholder="hello@example.com" autocomplete="off" spellcheck="false"></div>
+              <div class="row2">
+                <div class="field"><label class="k" for="f-email-subject">Subject</label>
+                  <input id="f-email-subject" type="text" data-k="emailSubject" placeholder="Optional"></div>
+                <div class="field"><label class="k" for="f-email-body">Message</label>
+                  <input id="f-email-body" type="text" data-k="emailBody" placeholder="Optional"></div>
+              </div>
+            </div>
+          </div>
+          <div data-pane="wifi" hidden>
+            <div class="w-body" style="padding:0">
+              <div class="row2">
+                <div class="field"><label class="k" for="f-wifi-ssid">Network name</label>
+                  <input id="f-wifi-ssid" type="text" data-k="ssid" autocomplete="off" spellcheck="false"></div>
+                <div class="field"><label class="k" for="f-wifi-pass">Password</label>
+                  <input id="f-wifi-pass" type="text" data-k="pass" placeholder="Empty if open" autocomplete="off" spellcheck="false"></div>
+              </div>
+              <div class="row2">
+                <div class="field"><label class="k" for="f-wifi-sec">Security</label>
+                  <select id="f-wifi-sec" data-k="sec">
+                    <option value="WPA">WPA / WPA2 / WPA3</option>
+                    <option value="WEP">WEP</option>
+                    <option value="nopass">None</option>
+                  </select></div>
+                <label class="check" style="align-self:end;padding-bottom:12px"><input id="f-wifi-hidden" type="checkbox" data-k="hidden"> Hidden network</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Colour -->
+      <section class="w" aria-labelledby="h2w">
+        <div class="w-head"><h2 id="h2w"><span>2</span>Colour</h2><small id="colourName">Ink on white</small></div>
+        <div class="w-body">
+          <div class="presets" role="group" aria-label="Colour presets" id="presets"></div>
+          <details>
+            <summary>Custom colours</summary>
+            <div class="inner">
+              <div class="colours">
+                <div class="field">
+                  <span class="k">Background</span>
+                  <div class="colour">
+                    <div class="swatch" id="bg-sw"><input id="bg-color" type="color" aria-label="Background colour"></div>
+                    <input id="bg-hex" type="text" maxlength="7" spellcheck="false" aria-label="Background hex">
+                  </div>
+                  <label class="check"><input id="bg-trans" type="checkbox" data-k="bgT"> Transparent</label>
+                </div>
+                <div class="field">
+                  <span class="k">Code</span>
+                  <div class="colour">
+                    <div class="swatch" id="fg-sw"><input id="fg-color" type="color" aria-label="Code colour"></div>
+                    <input id="fg-hex" type="text" maxlength="7" spellcheck="false" aria-label="Code hex">
+                  </div>
+                  <label class="check"><input id="fg-trans" type="checkbox" data-k="fgT"> Transparent</label>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 3. Shape -->
+      <section class="w" aria-labelledby="h3w">
+        <div class="w-head"><h2 id="h3w"><span>3</span>Shape</h2><small>Space and strength</small></div>
+        <div class="w-body">
+          <div class="field"><span class="k">Padding</span>
+            <div class="seg" role="group" aria-label="Padding around the code">
+              <button type="button" data-pad="0" aria-pressed="false">None</button>
+              <button type="button" data-pad="2" aria-pressed="false">Slim</button>
+              <button type="button" data-pad="4" aria-pressed="true">Standard</button>
+              <button type="button" data-pad="6" aria-pressed="false">Roomy</button>
+              <button type="button" data-pad="custom" aria-pressed="false">Custom</button>
+            </div>
+            <div class="padcustom" id="padCustom" hidden>
+              <input id="padPx" type="number" min="0" step="1" inputmode="numeric" aria-label="Padding in pixels">
+              <span id="padOf">px on each side of a 1024 px image</span>
+            </div></div>
+          <div class="field"><span class="k">Error correction</span>
+            <div class="seg" role="group" aria-label="Error correction">
+              <button type="button" data-ecc="L" aria-pressed="false">L</button>
+              <button type="button" data-ecc="M" aria-pressed="true">M</button>
+              <button type="button" data-ecc="Q" aria-pressed="false">Q</button>
+              <button type="button" data-ecc="H" aria-pressed="false">H</button>
+            </div>
+            <span style="font-size:10px;color:var(--stone)" id="eccHint"></span></div>
+          <details id="logoBox">
+            <summary>Add a logo in the centre</summary>
+            <div class="inner">
+              <div class="logo-row">
+                <div class="logo-prev" id="logoPrev"></div>
+                <span class="logo-name" id="logoName">No logo yet</span>
+                <label class="filebtn" for="logoFile" id="logoPick">Choose image</label>
+                <input id="logoFile" type="file" accept="image/png,image/jpeg,image/svg+xml,image/webp">
+              </div>
+              <div id="logoOpts" hidden>
+                <div class="w-body" style="padding:0">
+                  <div class="field"><label class="k" for="logoPct">Logo size <span id="logoPctOut" style="color:var(--ink)">20%</span></label>
+                    <input id="logoPct" type="range" min="10" max="25" step="1" data-k="logoPct"></div>
+                  <label class="check"><input id="logoClear" type="checkbox" data-k="logoClear"> Clear the code behind the logo</label>
+                  <button type="button" class="ghost" id="logoRemove">Remove logo</button>
+                </div>
+              </div>
+              <p class="note">PNG, JPG, SVG or WEBP. The image stays on your device.</p>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- 4. Export -->
+      <section class="w span" aria-labelledby="h4w">
+        <div class="w-head"><h2 id="h4w"><span>4</span>Export</h2><small>Several formats arrive as one .zip</small></div>
+        <div class="w-body">
+          <div class="row2">
+            <div class="field"><label class="k" for="fname">File name</label>
+              <input id="fname" type="text" data-k="name" placeholder="qr-code" spellcheck="false" autocomplete="off"></div>
+            <div class="field"><label class="k" for="size">Image size</label>
+              <select id="size" data-k="size">
+                <option value="512">512 px</option>
+                <option value="1024">1024 px</option>
+                <option value="2048">2048 px</option>
+                <option value="4096">4096 px</option>
+              </select></div>
+          </div>
+          <div class="field"><span class="k">Formats</span>
+            <div class="chips" role="group" aria-label="File formats">
+              <button type="button" class="chip" data-fmt="svg" aria-pressed="true">SVG</button>
+              <button type="button" class="chip" data-fmt="png" aria-pressed="false">PNG</button>
+              <button type="button" class="chip" data-fmt="jpg" aria-pressed="false">JPG</button>
+              <button type="button" class="chip" data-fmt="webp" aria-pressed="false">WEBP</button>
+              <button type="button" class="chip" data-fmt="pdf" aria-pressed="false">PDF</button>
+            </div></div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Preview (desktop) -->
+    <aside class="w preview" aria-label="QR code preview">
+      <div class="w-head"><h2>Preview</h2><span class="state" id="state">Waiting for content</span></div>
+      <div class="stage"><div class="frame" id="frame"></div></div>
+      <div class="meta" id="meta"><span>–</span><span>–</span></div>
+      <div class="warn" id="warn" hidden></div>
+      <div class="dl-area">
+        <button type="button" class="primary" data-dl><span class="dlText">Download</span><span aria-hidden="true">↓</span></button>
+        <button type="button" class="ghost" id="copy">Copy SVG code</button>
+        <div class="status" role="status"></div>
+      </div>
+    </aside>
+  </div>
+
+  <section class="faq" aria-labelledby="faqh">
+    <h2 id="faqh">Free QR code generator, explained</h2>
+    <div class="faq-grid">
+      <div><h3>Is it actually free?</h3><p>Yes. Every feature, every format, every size. No sign-up, no watermark, no trial, no premium tier waiting to ambush you.</p></div>
+      <div><h3>Do the codes expire?</h3><p>Never. These are static QR codes: the content lives inside the code itself, so there is no subscription keeping it alive.</p></div>
+      <div><h3>What happens to my data?</h3><p>Nothing. The code is generated in your browser. What you type or upload never touches a server and is not stored anywhere.</p></div>
+      <div><h3>Can I add my logo?</h3><p>Yes. Drop a logo in the centre and the code switches to its strongest error correction so it still scans.</p></div>
+      <div><h3>Can I track scans?</h3><p>Yes, honestly. Add UTM tags to a link and scans show up in your own analytics. No redirect service, no middleman.</p></div>
+      <div><h3>What can a QR code hold?</h3><p>Links, text, email, Wi-Fi logins, contact cards, calendar events, phone numbers, SMS, WhatsApp chats and map locations. Download as SVG, PNG, JPG, WEBP or PDF.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <a class="credit" href="https://jomiro.de" target="_blank" rel="noopener">
+      <span class="mark" id="logo" aria-hidden="true">JE</span>
+      <span><span class="by">Free QR code generator, vibe-coded by </span><span class="who">Jomiro Eming Design Lab</span></span>
+    </a>
+    <span>Your content never leaves this page. No cookies, no tracking, no accounts.</span>
+    <a class="gh" href="https://github.com/callmespiderbyte/no-bs-qr" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Open source on GitHub</a>
+  </footer>
+</div>
+
+<!-- Phone dock -->
+<div class="dock" id="dock">
+  <button type="button" class="thumb" id="thumb" aria-label="Enlarge preview"></button>
+  <div class="info"><b id="dockTitle">Waiting for content</b><span id="dockSub" class="status-alt"></span></div>
+  <button type="button" class="primary" data-dl><span class="dlText">Download</span><span aria-hidden="true">↓</span></button>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script>
+(function(){
+  /* Nothing is persisted: state lives in memory and is gone when the tab closes. */
+  const S = {type:'url',url:'',text:'',emailTo:'',emailSubject:'',emailBody:'',ssid:'',pass:'',sec:'WPA',hidden:false,
+    utmSource:'',utmMedium:'',utmCampaign:'',utmContent:'',
+    vFirst:'',vLast:'',vOrg:'',vTitle:'',vTel:'',vEmail:'',vUrl:'',
+    evTitle:'',evLoc:'',evDate:'',evStart:'',evEnd:'',evAllDay:false,
+    tel:'',smsNum:'',smsMsg:'',waNum:'',waMsg:'',geo:'',
+    logo:null,logoPng:null,logoImg:null,logoRatio:1,logoName:'',logoPct:20,logoClear:true,
+    bg:'#ffffff',bgT:false,fg:'#0c0c0b',fgT:false,ecc:'M',margin:4,padMode:'preset',padPx:48,size:1024,name:'',fmts:['svg']};
+
+  /* Padding in module units. Custom pixel padding is converted against the export size, so the file gets exactly that many pixels per side. */
+  const maxPad=()=>Math.floor(Number(S.size)*0.4);
+  function mgEff(n){
+    if(S.padMode!=='custom') return S.margin;
+    const P=Math.max(0,Math.min(Number(S.padPx)||0,maxPad()));
+    return P*n/(Number(S.size)-2*P);
+  }
+  const padLabel=()=>S.padMode==='custom'?(Math.min(Number(S.padPx)||0,maxPad())+' px padding'):PAD_NAME[S.margin];
+  const noPad=()=>S.padMode==='custom'?!(Number(S.padPx)>0):S.margin===0;
+  const eccEff=()=>S.logo?'H':S.ecc;
+
+  const PRESETS = [
+    {name:'Ink on white', bg:'#ffffff', fg:'#0c0c0b', bgT:false, fgT:false},
+    {name:'White on ink', bg:'#0c0c0b', fg:'#ffffff', bgT:false, fgT:false},
+    {name:'Graphite on bone', bg:'#f0efeb', fg:'#3b3a37', bgT:false, fgT:false},
+    {name:'Ink on stone', bg:'#dcdad5', fg:'#0c0c0b', bgT:false, fgT:false},
+    {name:'Ink, no background', bg:'#ffffff', fg:'#0c0c0b', bgT:true, fgT:false},
+    {name:'Cut out of ink', bg:'#0c0c0b', fg:'#ffffff', bgT:false, fgT:true},
+  ];
+  const ECC_HINT = {L:'Smallest code, survives 7% damage', M:'Balanced, survives 15% damage', Q:'Sturdy, survives 25% damage', H:'Toughest, survives 30%. Use it if a logo goes on top'};
+  const PAD_NAME = {0:'no padding',2:'slim padding',4:'standard padding',6:'roomy padding'};
+  const MORE_NAME = {vcard:'Contact',event:'Event',tel:'Phone',sms:'SMS',whatsapp:'WhatsApp',geo:'Location'};
+
+  const $ = s => document.querySelector(s);
+  const $$ = s => Array.from(document.querySelectorAll(s));
+  let current = null, downloads = null, hadCode = false;
+
+  /* ---------- payload ---------- */
+  const wifiEsc = s => String(s).replace(/([\\;,:"])/g,'\\$1');
+  const icsEsc = s => String(s).replace(/\\/g,'\\\\').replace(/\r?\n/g,'\\n').replace(/([,;])/g,'\\$1');
+  const cleanTel = s => String(s||'').trim().replace(/(?!^\+)[^\d]/g,'');
+  const d8 = s => s.replace(/-/g,'');
+  function addDays(dateStr, n){ const d=new Date(dateStr+'T00:00:00Z'); d.setUTCDate(d.getUTCDate()+n); return d.toISOString().slice(0,10); }
+  function stamp(dateStr, timeStr){ return d8(dateStr)+'T'+timeStr.replace(':','')+'00'; }
+  function plusHour(dateStr, timeStr){ const d=new Date(dateStr+'T'+timeStr+':00Z'); d.setUTCHours(d.getUTCHours()+1); return d.toISOString().slice(0,16).replace(/[-:]/g,'').replace('T','T')+'00'; }
+
+  function payload(){
+    switch(S.type){
+      case 'url': {
+        let u=(S.url||'').trim(); if(!u) return '';
+        if(!/^[a-z][a-z0-9+.-]*:/i.test(u)) u='https://'+u;
+        const utm=[['utm_source',S.utmSource],['utm_medium',S.utmMedium],['utm_campaign',S.utmCampaign],['utm_content',S.utmContent]].filter(([,v])=>v&&v.trim());
+        if(utm.length){
+          try{ const U=new URL(u); utm.forEach(([k,v])=>U.searchParams.set(k,v.trim())); u=U.toString(); }
+          catch(e){ u+=(u.includes('?')?'&':'?')+utm.map(([k,v])=>k+'='+encodeURIComponent(v.trim())).join('&'); }
+        }
+        return u;
+      }
+      case 'text': return S.text||'';
+      case 'email': {
+        const to=(S.emailTo||'').trim(); if(!to) return '';
+        const q=[]; if(S.emailSubject) q.push('subject='+encodeURIComponent(S.emailSubject)); if(S.emailBody) q.push('body='+encodeURIComponent(S.emailBody));
+        return 'mailto:'+to+(q.length?'?'+q.join('&'):'');
+      }
+      case 'wifi': {
+        if(!S.ssid) return '';
+        let s='WIFI:T:'+S.sec+';S:'+wifiEsc(S.ssid)+';';
+        if(S.sec!=='nopass' && S.pass) s+='P:'+wifiEsc(S.pass)+';';
+        if(S.hidden) s+='H:true;';
+        return s+';';
+      }
+      case 'vcard': {
+        const first=S.vFirst.trim(), last=S.vLast.trim(), org=S.vOrg.trim();
+        if(!first&&!last&&!org) return '';
+        const L=['BEGIN:VCARD','VERSION:3.0','N:'+icsEsc(last)+';'+icsEsc(first)+';;;','FN:'+icsEsc([first,last].filter(Boolean).join(' ')||org)];
+        if(org) L.push('ORG:'+icsEsc(org));
+        if(S.vTitle.trim()) L.push('TITLE:'+icsEsc(S.vTitle.trim()));
+        if(S.vTel.trim()) L.push('TEL;TYPE=CELL:'+cleanTel(S.vTel));
+        if(S.vEmail.trim()) L.push('EMAIL:'+S.vEmail.trim());
+        if(S.vUrl.trim()){ let w=S.vUrl.trim(); if(!/^[a-z][a-z0-9+.-]*:/i.test(w)) w='https://'+w; L.push('URL:'+w); }
+        L.push('END:VCARD');
+        return L.join('\n');
+      }
+      case 'event': {
+        if(!S.evTitle.trim()||!S.evDate) return '';
+        const L=['BEGIN:VEVENT','SUMMARY:'+icsEsc(S.evTitle.trim())];
+        if(S.evLoc.trim()) L.push('LOCATION:'+icsEsc(S.evLoc.trim()));
+        if(S.evAllDay||!S.evStart){
+          L.push('DTSTART;VALUE=DATE:'+d8(S.evDate),'DTEND;VALUE=DATE:'+d8(addDays(S.evDate,1)));
+        } else {
+          L.push('DTSTART:'+stamp(S.evDate,S.evStart));
+          L.push('DTEND:'+((S.evEnd&&S.evEnd>S.evStart)?stamp(S.evDate,S.evEnd):plusHour(S.evDate,S.evStart)));
+        }
+        L.push('END:VEVENT');
+        return L.join('\n');
+      }
+      case 'tel': { const t=cleanTel(S.tel); return t?'tel:'+t:''; }
+      case 'sms': { const t=cleanTel(S.smsNum); return t?'SMSTO:'+t+':'+(S.smsMsg||''):''; }
+      case 'whatsapp': {
+        const d=String(S.waNum||'').replace(/\D/g,''); if(!d) return '';
+        return 'https://wa.me/'+d+(S.waMsg?'?text='+encodeURIComponent(S.waMsg):'');
+      }
+      case 'geo': {
+        const g=(S.geo||'').trim(); if(!g) return '';
+        const m=g.match(/^\s*(-?\d{1,3}(?:\.\d+)?)\s*,\s*(-?\d{1,3}(?:\.\d+)?)\s*$/);
+        return m?'geo:'+m[1]+','+m[2]:'https://maps.google.com/?q='+encodeURIComponent(g);
+      }
+    }
+    return '';
+  }
+  const utf8 = s => unescape(encodeURIComponent(s));
+
+  /* ---------- matrix ---------- */
+  function build(p, ecc){
+    const q=qrcode(0,ecc||eccEff()); q.addData(utf8(p)); q.make();
+    const n=q.getModuleCount(), dark=new Uint8Array(n*n);
+    for(let r=0;r<n;r++) for(let c=0;c<n;c++) dark[r*n+c]=q.isDark(r,c)?1:0;
+    return {n,dark,runs:runsFrom(n,dark,null)};
+  }
+  function runsFrom(n,dark,hole){
+    const runs=[], inHole=(r,c)=>hole&&r>=hole.o&&r<hole.o+hole.L&&c>=hole.o&&c<hole.o+hole.L;
+    for(let r=0;r<n;r++){ let c=0; while(c<n){ if(dark[r*n+c]&&!inHole(r,c)){ const s=c; while(c<n&&dark[r*n+c]&&!inHole(r,c)) c++; runs.push([r,s,c-s]); } else c++; } }
+    return runs;
+  }
+  /* Logo sits on the module grid, centred, sized as a share of the code width */
+  function logoGeom(n){
+    if(!S.logo) return null;
+    let L=Math.max(3,Math.round(n*S.logoPct/100)); if((n-L)%2) L+=1;
+    return {o:(n-L)/2, L};
+  }
+  function logoRect(m, mg){
+    const g=logoGeom(m.n); if(!g) return null;
+    const inset=S.logoClear?0.6:0, box=g.L-2*inset, r=S.logoRatio||1;
+    let w=box,h=box; if(r>1) h=box/r; else w=box*r;
+    return {x:mg+g.o+inset+(box-w)/2, y:mg+g.o+inset+(box-h)/2, w, h};
+  }
+
+  /* ---------- svg ---------- */
+  function svgString(m, opts){
+    const o=Object.assign({bg:S.bg,fg:S.fg,bgT:S.bgT,fgT:S.fgT,px:S.size,noLogo:false},opts||{});
+    const mg=o.margin!=null?o.margin:mgEff(m.n), t=+(m.n+2*mg).toFixed(4);
+    const f=x=>+x.toFixed(4);
+    const mods=m.runs.map(([r,c,l])=>'M'+f(c+mg)+' '+f(r+mg)+'h'+l+'v1h-'+l+'z').join('');
+    let body='';
+    if(o.fgT && !o.bgT) body='<path fill="'+o.bg+'" fill-rule="evenodd" d="M0 0h'+t+'v'+t+'h-'+t+'z'+mods+'"/>';
+    else { if(!o.bgT) body+='<rect width="'+t+'" height="'+t+'" fill="'+o.bg+'"/>'; if(!o.fgT) body+='<path fill="'+o.fg+'" d="'+mods+'"/>'; }
+    const lr=!o.noLogo&&logoRect(m,mg);
+    if(lr) body+='<image href="'+S.logo+'" xlink:href="'+S.logo+'" x="'+f(lr.x)+'" y="'+f(lr.y)+'" width="'+f(lr.w)+'" height="'+f(lr.h)+'" preserveAspectRatio="xMidYMid meet"/>';
+    return '<svg xmlns="http://www.w3.org/2000/svg"'+(lr?' xmlns:xlink="http://www.w3.org/1999/xlink"':'')+' width="'+o.px+'" height="'+o.px+'" viewBox="0 0 '+t+' '+t+'" shape-rendering="crispEdges">'+body+'</svg>';
+  }
+
+  /* ---------- raster + pdf ---------- */
+  function canvasFor(m, fmt){
+    const size=Number(S.size), mg=mgEff(m.n), t=m.n+2*mg, s=size/t;
+    const c=document.createElement('canvas'); c.width=c.height=size; const ctx=c.getContext('2d');
+    let bg=S.bgT?null:S.bg, fg=S.fgT?null:S.fg;
+    if(fmt==='jpg'){ if(!bg) bg='#ffffff'; if(!fg) fg='#ffffff'; }
+    if(bg){ ctx.fillStyle=bg; ctx.fillRect(0,0,size,size); }
+    ctx.beginPath(); for(const [r,cc,l] of m.runs) ctx.rect((cc+mg)*s,(r+mg)*s,l*s,s);
+    if(fg){ ctx.fillStyle=fg; ctx.fill(); } else { ctx.globalCompositeOperation='destination-out'; ctx.fill(); ctx.globalCompositeOperation='source-over'; }
+    const lr=logoRect(m,mg);
+    if(lr&&S.logoImg){ ctx.imageSmoothingQuality='high'; ctx.drawImage(S.logoImg,lr.x*s,lr.y*s,lr.w*s,lr.h*s); }
+    return c;
+  }
+  const toBlob=(cv,mime)=>new Promise((res,rej)=>cv.toBlob(b=>b?res(b):rej(new Error('Your browser could not make a '+mime.split('/')[1].toUpperCase()+' file.')),mime,0.95));
+  function pdfBlob(m){
+    const J=window.jspdf&&window.jspdf.jsPDF; if(!J) throw new Error('The PDF library did not load. Reload the page and try again.');
+    const W=100, mg=mgEff(m.n), t=m.n+2*mg, s=W/t;
+    const doc=new J({unit:'mm',format:[W,W],orientation:'portrait'});
+    if(S.fgT){ doc.addImage(canvasFor(m,'png').toDataURL('image/png'),'PNG',0,0,W,W); }
+    else {
+      if(!S.bgT){ doc.setFillColor(S.bg); doc.rect(0,0,W,W,'F'); }
+      doc.setFillColor(S.fg); const e=0.015;
+      for(const [r,c,l] of m.runs) doc.rect((c+mg)*s,(r+mg)*s,l*s+e,s+e,'F');
+      const lr=logoRect(m,mg);
+      if(lr&&S.logoPng) doc.addImage(S.logoPng,'PNG',lr.x*s,lr.y*s,lr.w*s,lr.h*s);
+    }
+    return doc.output('blob');
+  }
+
+  /* ---------- placeholder animation ---------- */
+  const G=25, cells=new Uint8Array(G*G);
+  for(let i=0;i<cells.length;i++) cells[i]=Math.random()<.45?1:0;
+  const inFinder=(r,c)=>(r<8&&c<8)||(r<8&&c>=G-8)||(r>=G-8&&c<8);
+  function finderDark(r,c){
+    const fr=r<8?r:r-(G-7), fc=c<8?c:c-(G-7);
+    if(fr<0||fr>6||fc<0||fc>6) return false;
+    return fr===0||fr===6||fc===0||fc===6||(fr>=2&&fr<=4&&fc>=2&&fc<=4);
+  }
+  const placeholderCanvases=[];
+  function makeCanvas(px){ const c=document.createElement('canvas'); c.width=c.height=px; placeholderCanvases.push(c); return c; }
+  function drawPlaceholders(){
+    const ink=getComputedStyle(document.documentElement).getPropertyValue('--stone').trim()||'#8c8a84';
+    for(const cv of placeholderCanvases){
+      if(!cv.isConnected) continue;
+      const ctx=cv.getContext('2d'), s=cv.width/(G+4);
+      ctx.clearRect(0,0,cv.width,cv.height); ctx.fillStyle=ink; ctx.beginPath();
+      for(let r=0;r<G;r++) for(let c=0;c<G;c++){
+        const on=inFinder(r,c)?finderDark(r,c):cells[r*G+c];
+        if(on) ctx.rect((c+2)*s,(r+2)*s,s,s);
+      }
+      ctx.fill();
+    }
+  }
+  let timer=null;
+  const reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function startAnim(){
+    drawPlaceholders();
+    if(timer||reduce) return;
+    timer=setInterval(()=>{ for(let k=0;k<40;k++){ const i=Math.floor(Math.random()*cells.length); cells[i]^=1; } drawPlaceholders(); },120);
+  }
+  function stopAnim(){ clearInterval(timer); timer=null; }
+  const bigCanvas=makeCanvas(500), dockCanvas=makeCanvas(200);
+
+  /* ---------- presets ---------- */
+  const sample=(function(){ try{ return build('NS','M'); }catch(e){ return null; } })();
+  PRESETS.forEach((p,i)=>{
+    const b=document.createElement('button'); b.type='button'; b.className='preset'+(p.bgT?' tr':''); b.dataset.preset=i;
+    b.title=p.name; b.setAttribute('aria-label',p.name);
+    if(p.fgT) b.style.background='#ffffff'; else if(!p.bgT) b.style.background=p.bg;
+    if(sample) b.innerHTML=svgString(sample,{bg:p.bg,fg:p.fg,bgT:p.bgT,fgT:p.fgT,margin:p.fgT?1:0,px:40,noLogo:true});
+    b.addEventListener('click',()=>{ Object.assign(S,{bg:p.bg,fg:p.fg,bgT:p.bgT,fgT:p.fgT}); $('#bg-trans').checked=S.bgT; $('#fg-trans').checked=S.fgT; render(); });
+    $('#presets').append(b);
+  });
+
+  /* ---------- helpers ---------- */
+  function lum(hex){ const v=hex.replace('#',''); const rgb=[0,2,4].map(i=>parseInt(v.substr(i,2),16)/255).map(x=>x<=0.03928?x/12.92:Math.pow((x+0.055)/1.055,2.4)); return 0.2126*rgb[0]+0.7152*rgb[1]+0.0722*rgb[2]; }
+  const fileBase=()=>((S.name||'').trim().replace(/\.(svg|png|jpe?g|webp|pdf|zip)$/i,'').replace(/[\\/:*?"<>|]+/g,'-'))||'qr-code';
+  const setStatus=t=>{ $$('.status').forEach(e=>e.textContent=t||''); if(t) $('#dockSub').textContent=t; };
+
+  /* ---------- render ---------- */
+  function render(){
+    $$('[data-type]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.type===S.type)));
+    $$('[data-pane]').forEach(p=>p.hidden=p.dataset.pane!==S.type);
+    const isMore=!!MORE_NAME[S.type];
+    $('#moreBtn').setAttribute('aria-pressed',String(isMore));
+    $('#moreBtn').textContent=isMore?MORE_NAME[S.type]:'More';
+    $$('[data-more]').forEach(b=>b.setAttribute('aria-current',String(b.dataset.more===S.type)));
+    $$('[data-ecc]').forEach(b=>{ b.setAttribute('aria-pressed',String(b.dataset.ecc===eccEff())); b.disabled=!!S.logo; });
+    $('#evTimes').hidden=!!S.evAllDay;
+    $('#utmBox').querySelector('summary').innerHTML='Add tracking (UTM)'+((S.utmSource||S.utmMedium||S.utmCampaign||S.utmContent)?'<span class="on">On</span>':'');
+    $('#logoOpts').hidden=!S.logo;
+    $('#logoName').textContent=S.logo?S.logoName:'No logo yet';
+    $('#logoPick').textContent=S.logo?'Replace':'Choose image';
+    $('#logoPctOut').textContent=S.logoPct+'%';
+    $('#logoBox').querySelector('summary').innerHTML='Add a logo in the centre'+(S.logo?'<span class="on">On</span>':'');
+    if(S.logo){ if(!$('#logoPrev img')){ const i=document.createElement('img'); i.alt=''; $('#logoPrev').append(i); } $('#logoPrev img').src=S.logo; } else $('#logoPrev').innerHTML='';
+    $$('[data-pad]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.pad==='custom'?S.padMode==='custom':(S.padMode!=='custom'&&Number(b.dataset.pad)===S.margin))));
+    $('#padCustom').hidden=S.padMode!=='custom';
+    $('#padPx').max=maxPad();
+    if(document.activeElement!==$('#padPx')) $('#padPx').value=S.padPx;
+    $('#padOf').textContent='px each side of a '+S.size+' px image'+(Number(S.padPx)>maxPad()?' (capped at '+maxPad()+')':'');
+    $$('[data-fmt]').forEach(b=>b.setAttribute('aria-pressed',String(S.fmts.includes(b.dataset.fmt))));
+    $('#eccHint').textContent=S.logo?'Set to H, the strongest level, so the code still scans with a logo covering part of it':ECC_HINT[S.ecc];
+    let pname='Custom';
+    $$('[data-preset]').forEach(b=>{ const p=PRESETS[b.dataset.preset]; const on=p.bg===S.bg&&p.fg===S.fg&&p.bgT===S.bgT&&p.fgT===S.fgT; if(on) pname=p.name; b.setAttribute('aria-pressed',String(on)); });
+    $('#colourName').textContent=pname;
+    for(const k of ['bg','fg']){
+      const T=S[k+'T']; $('#'+k+'-color').value=S[k];
+      const hx=$('#'+k+'-hex'); if(document.activeElement!==hx) hx.value=S[k].toUpperCase();
+      hx.disabled=T; $('#'+k+'-color').disabled=T; $('#'+k+'-sw').classList.toggle('off',T);
+    }
+
+    const p=payload(), frame=$('#frame'), thumb=$('#thumb');
+    current=null; let warn='', stateTxt='Waiting for content';
+    if(p){
+      try{
+        const m=build(p);
+        if(S.logo&&S.logoClear) m.runs=runsFrom(m.n,m.dark,logoGeom(m.n));
+        current=Object.assign(m,{svg:svgString(m)});
+      }
+      catch(e){ warn=S.logo?'This is too long for one QR code with a logo. Shorten it, or remove the logo.':'This is too long for one QR code. Shorten it, or pick a lower error correction.'; stateTxt='Too long'; }
+    }
+    if(current){
+      stopAnim();
+      const anim=!hadCode;
+      frame.innerHTML=current.svg; thumb.innerHTML=current.svg;
+      if(anim){ const s=frame.querySelector('svg'); if(s) s.classList.add('build'); }
+      /* Any transparency (background or cut-out code) shows over a checkerboard, so holes read as holes in every theme */
+      const tr=S.bgT||S.fgT;
+      frame.classList.toggle('checker',tr); thumb.classList.toggle('checker',tr);
+      stateTxt='Ready'; hadCode=true;
+    } else {
+      hadCode=false;
+      frame.classList.remove('checker'); thumb.classList.remove('checker');
+      if(!frame.contains(bigCanvas)){ frame.innerHTML=''; frame.append(bigCanvas); }
+      if(!thumb.contains(dockCanvas)){ thumb.innerHTML=''; thumb.append(dockCanvas); }
+      startAnim();
+    }
+    const st=$('#state'); st.textContent=stateTxt; st.className='state'+(current?' ready':' busy');
+    $('#meta').innerHTML = current
+      ? '<span>'+current.n+' × '+current.n+' modules, '+padLabel()+'</span><span>'+utf8(p).length+' bytes</span>'
+      : '<span>Type something in Content to start</span><span></span>';
+
+    if(!warn){
+      if(S.bgT&&S.fgT) warn='Both colours are transparent, so nothing would show.';
+      else if(!S.bgT&&!S.fgT){ const a=lum(S.bg),b=lum(S.fg),r=(Math.max(a,b)+.05)/(Math.min(a,b)+.05); if(r<3) warn='Low contrast. Phones may struggle to scan this.'; }
+      if(!warn && current && noPad()) warn='No padding. Leave space around it in your layout, or scanners can miss it.';
+      if(!warn && current && S.fmts.includes('jpg') && (S.bgT||S.fgT)) warn='JPG has no transparency, so transparent parts export as white.';
+    }
+    $('#warn').hidden=!warn; $('#warn').textContent=warn;
+
+    const n=S.fmts.length;
+    const label = n===0?'Pick a format':n===1?'Download '+S.fmts[0].toUpperCase():'Download .zip';
+    $$('.dlText').forEach(e=>e.textContent=label);
+    $$('[data-dl]').forEach(b=>b.disabled=!current||n===0||(S.bgT&&S.fgT));
+    $('#copy').disabled=!current;
+    $('#dockTitle').textContent = current ? fileBase()+' · '+S.fmts.map(f=>f.toUpperCase()).join(', ') : stateTxt;
+    $('#dockSub').textContent = warn || (current ? (current.n+' × '+current.n+', '+padLabel()) : 'Your code builds here');
+  }
+
+  /* ---------- inputs ---------- */
+  $$('[data-k]').forEach(el=>{
+    const k=el.dataset.k;
+    if(el.type==='checkbox') el.checked=!!S[k]; else el.value=S[k];
+    el.addEventListener('input',()=>{
+      if(el.type==='checkbox') S[k]=el.checked; else if(k==='size'||el.type==='range') S[k]=Number(el.value); else S[k]=el.value;
+      setStatus(''); render();
+    });
+  });
+  $$('[data-type]').forEach(b=>b.addEventListener('click',()=>{ S.type=b.dataset.type; closeMenu(); render(); }));
+  const menu=$('#moreMenu'), moreBtn=$('#moreBtn');
+  function closeMenu(){ menu.hidden=true; moreBtn.setAttribute('aria-expanded','false'); }
+  moreBtn.addEventListener('click',e=>{ e.stopPropagation(); const open=menu.hidden; menu.hidden=!open; moreBtn.setAttribute('aria-expanded',String(open)); if(open){ const f=menu.querySelector('[aria-current=true]')||menu.querySelector('button'); f.focus(); } });
+  $$('[data-more]').forEach(b=>b.addEventListener('click',()=>{ S.type=b.dataset.more; closeMenu(); render(); const first=document.querySelector('[data-pane="'+S.type+'"] input, [data-pane="'+S.type+'"] textarea'); if(first) first.focus(); }));
+  document.addEventListener('click',e=>{ if(!menu.hidden&&!menu.contains(e.target)&&e.target!==moreBtn) closeMenu(); });
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'&&!menu.hidden){ closeMenu(); moreBtn.focus(); } });
+
+  /* Logo: read locally with FileReader, never uploaded. A raster copy is kept for PNG, JPG, WEBP and PDF exports. */
+  $('#logoFile').addEventListener('change',e=>{
+    const file=e.target.files&&e.target.files[0]; e.target.value=''; if(!file) return;
+    if(file.size>5*1024*1024){ setStatus('That image is over 5 MB. Pick a smaller file.'); return; }
+    const reader=new FileReader();
+    reader.onload=()=>{
+      const url=reader.result, img=new Image();
+      img.onload=()=>{
+        const w=img.naturalWidth||1024, h=img.naturalHeight||1024, sc=1024/Math.max(w,h);
+        const c=document.createElement('canvas'); c.width=Math.max(1,Math.round(w*sc)); c.height=Math.max(1,Math.round(h*sc));
+        c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+        const png=c.toDataURL('image/png'), r=new Image();
+        r.onload=()=>{ Object.assign(S,{logo:url,logoPng:png,logoImg:r,logoRatio:c.width/c.height,logoName:file.name}); setStatus(''); render(); };
+        r.src=png;
+      };
+      img.onerror=()=>setStatus('That image could not be read. Try a PNG, JPG or SVG.');
+      img.src=url;
+    };
+    reader.onerror=()=>setStatus('That image could not be read. Try a PNG, JPG or SVG.');
+    reader.readAsDataURL(file);
+  });
+  $('#logoRemove').addEventListener('click',()=>{ Object.assign(S,{logo:null,logoPng:null,logoImg:null,logoName:''}); render(); });
+  $$('[data-ecc]').forEach(b=>b.addEventListener('click',()=>{ S.ecc=b.dataset.ecc; render(); }));
+  $$('[data-pad]').forEach(b=>b.addEventListener('click',()=>{
+    if(b.dataset.pad==='custom'){ S.padMode='custom'; render(); $('#padPx').focus(); $('#padPx').select(); }
+    else { S.padMode='preset'; S.margin=Number(b.dataset.pad); render(); }
+  }));
+  $('#padPx').addEventListener('input',e=>{ const v=Math.max(0,Math.round(Number(e.target.value)||0)); S.padPx=v; render(); });
+  $('#padPx').addEventListener('blur',()=>{ S.padPx=Math.min(Number(S.padPx)||0,maxPad()); render(); });
+  $$('[data-fmt]').forEach(b=>b.addEventListener('click',()=>{
+    const f=b.dataset.fmt, order=['svg','png','jpg','webp','pdf'];
+    S.fmts=S.fmts.includes(f)?S.fmts.filter(x=>x!==f):S.fmts.concat(f);
+    S.fmts.sort((a,c)=>order.indexOf(a)-order.indexOf(c)); render();
+  }));
+  for(const k of ['bg','fg']){
+    $('#'+k+'-color').addEventListener('input',e=>{ S[k]=e.target.value.toLowerCase(); render(); });
+    $('#'+k+'-hex').addEventListener('input',e=>{
+      let v=e.target.value.trim(); if(v&&v[0]!=='#') v='#'+v;
+      if(/^#[0-9a-f]{6}$/i.test(v)){ S[k]=v.toLowerCase(); render(); }
+      else if(/^#[0-9a-f]{3}$/i.test(v)){ S[k]=('#'+v[1]+v[1]+v[2]+v[2]+v[3]+v[3]).toLowerCase(); render(); }
+    });
+    $('#'+k+'-hex').addEventListener('blur',render);
+  }
+  $('#thumb').addEventListener('click',()=>{ const d=$('#dock'); d.classList.toggle('big'); $('#thumb').setAttribute('aria-label',d.classList.contains('big')?'Shrink preview':'Enlarge preview'); });
+
+  /* ---------- export ---------- */
+  async function makeFile(fmt){
+    const base=fileBase(), m=current;
+    if(fmt==='svg') return {name:base+'.svg', blob:new Blob(['<?xml version="1.0" encoding="UTF-8"?>\n'+m.svg],{type:'image/svg+xml'})};
+    if(fmt==='png') return {name:base+'.png', blob:await toBlob(canvasFor(m,'png'),'image/png')};
+    if(fmt==='jpg') return {name:base+'.jpg', blob:await toBlob(canvasFor(m,'jpg'),'image/jpeg')};
+    if(fmt==='webp') return {name:base+'.webp', blob:await toBlob(canvasFor(m,'webp'),'image/webp')};
+    if(fmt==='pdf') return {name:base+'.pdf', blob:pdfBlob(m)};
+  }
+  function plainSave(name, blob){
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name;
+    document.body.append(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+  }
+  const inClaude=!!(window.claude&&typeof window.claude.use==='function');
+
+  async function doDownload(){
+    if(!current||!S.fmts.length) return;
+    $$('[data-dl]').forEach(b=>b.disabled=true); setStatus('Making files…');
+    try{
+      const files=[]; for(const f of S.fmts) files.push(await makeFile(f));
+      let out;
+      if(files.length===1) out={filename:files[0].name, data:files[0].blob};
+      else {
+        if(!window.JSZip) throw new Error('The zip library did not load. Reload the page, or pick one format.');
+        const z=new JSZip(); files.forEach(f=>z.file(f.name,f.blob));
+        out={filename:fileBase()+'.zip', data:await z.generateAsync({type:'blob'})};
+      }
+      if(inClaude){
+        if(!downloads){ render(); setStatus('Downloads are not available in this view. Use Copy SVG code instead.'); return; }
+        setStatus('Confirm the download in the prompt.');
+        await downloads.save(out);
+      } else plainSave(out.filename, out.data);
+      render(); setStatus('Saved '+out.filename+'.');
+    }catch(e){
+      render();
+      const code=e&&e.code;
+      if(code==='declined') setStatus('Download cancelled.');
+      else if(code==='rate_limited') setStatus('A download prompt is already open. Finish that one first.');
+      else if(['unavailable','not_granted','capability_disabled','capability_removed'].includes(code)) setStatus('Downloads are not available in this view. Use Copy SVG code instead.');
+      else setStatus((e&&e.message)||'Something went wrong while making the files.');
+    }
+  }
+  $$('[data-dl]').forEach(b=>b.addEventListener('click',doDownload));
+
+  $('#copy').addEventListener('click', async ()=>{
+    if(!current) return;
+    try{ await navigator.clipboard.writeText(current.svg); setStatus('SVG code copied.'); }
+    catch(e){
+      const ta=document.createElement('textarea'); ta.value=current.svg; ta.setAttribute('readonly',''); ta.style.position='fixed'; ta.style.opacity='0';
+      document.body.append(ta); ta.select();
+      try{ document.execCommand('copy'); setStatus('SVG code copied.'); }catch(_){ setStatus('Copy was blocked by your browser.'); }
+      ta.remove();
+    }
+  });
+
+  render();
+  if(inClaude) window.claude.use('downloads').then(d=>{ downloads=d; }).catch(()=>{ downloads=null; });
+})();
+</script>
+
+</body>
+</html>
