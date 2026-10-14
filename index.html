@@ -236,7 +236,18 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
   .colours{grid-template-columns:1fr}
   .seg button{font-size:10px;padding:9px 3px}
 }
-@media (max-width:440px){.dock{grid-template-columns:auto auto minmax(0,1fr)}.dock .info{display:none}.dock .primary{justify-content:center}}
+/* Phone dock: thumbnail on the left, one status line on top, the two actions underneath */
+@media (max-width:900px){
+  .dock{grid-template-columns:64px minmax(0,1fr) minmax(0,1.5fr);grid-template-areas:"thumb info info" "thumb copy dl";column-gap:12px;row-gap:8px;align-items:stretch}
+  .dock .thumb{grid-area:thumb;align-self:center}
+  .dock .info{grid-area:info;display:flex;align-items:baseline;gap:8px;min-width:0;white-space:nowrap}
+  .dock .info b{flex:none;max-width:60%;overflow:hidden;text-overflow:ellipsis}
+  .dock .info span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .dock .copybtn{grid-area:copy;padding:9px 8px;white-space:normal;line-height:1.15}
+  .dock .primary{grid-area:dl;padding:9px 12px;justify-content:space-between}
+  .dock.big{grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);grid-template-areas:"thumb thumb" "info info" "copy dl"}
+  .dock.big .thumb{grid-area:thumb}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
@@ -966,7 +977,9 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     if(current){
       stopAnim();
       const anim=!hadCode;
-      frame.innerHTML=current.svg; thumb.innerHTML=current.svg;
+      /* Only redraw when the code changed, so a tap on the thumbnail is not lost to a redraw */
+      if(frame.dataset.svg!==current.svg){ frame.innerHTML=current.svg; frame.dataset.svg=current.svg; }
+      if(thumb.dataset.svg!==current.svg){ thumb.innerHTML=current.svg; thumb.dataset.svg=current.svg; }
       if(anim){ const s=frame.querySelector('svg'); if(s) s.classList.add('build'); }
       /* Any transparency (background or cut-out code) shows over a checkerboard, so holes read as holes in every theme */
       const tr=S.bgT||S.fgT;
@@ -975,8 +988,8 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     } else {
       hadCode=false;
       frame.classList.remove('checker'); thumb.classList.remove('checker');
-      if(!frame.contains(bigCanvas)){ frame.innerHTML=''; frame.append(bigCanvas); }
-      if(!thumb.contains(dockCanvas)){ thumb.innerHTML=''; thumb.append(dockCanvas); }
+      if(!frame.contains(bigCanvas)){ frame.innerHTML=''; frame.append(bigCanvas); frame.dataset.svg=''; }
+      if(!thumb.contains(dockCanvas)){ thumb.innerHTML=''; thumb.append(dockCanvas); thumb.dataset.svg=''; }
       startAnim();
     }
     const st=$('#state'); st.textContent=stateTxt; st.className='state'+(current?' ready':' busy');
