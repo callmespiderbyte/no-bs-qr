@@ -106,6 +106,13 @@ function more(p, t) {
   </nav>`;
 }
 
+function langFlip(p) {
+  const toDe = p.lang !== 'de';
+  return toDe
+    ? `<a class="langflip" href="/de/" hreflang="de" lang="de" data-from="EN" data-to="DE" title="Auf Deutsch"><canvas width="13" height="9" aria-hidden="true"></canvas><span class="cap">Deutsch</span></a>`
+    : `<a class="langflip" href="/" hreflang="en" lang="en" data-from="DE" data-to="EN" title="In English"><canvas width="13" height="9" aria-hidden="true"></canvas><span class="cap">English</span></a>`;
+}
+
 function langSwitch(p) {
   return p.lang === 'de'
     ? `<a class="lang" href="/" hreflang="en" lang="en">English</a>`
@@ -177,7 +184,7 @@ function render(p) {
     LANG: t.htmlLang, HTML_ATTRS: attrs, HEAD_META: headMeta(p, t),
     OG_ALT: `<meta property="og:image:alt" content="${esc(t.ogAlt)}">`,
     JSONLD: jsonld(p, t), HEADER: header(p), SECTIONS: sections(p), MORE: more(p, t),
-    BYLINE: esc(t.byline), PRIVACY: esc(t.privacy), GITHUB: esc(t.github), LANG_SWITCH: langSwitch(p),
+    LANG_FLIP: langFlip(p), BYLINE: esc(t.byline), PRIVACY: esc(t.privacy), GITHUB: esc(t.github), LANG_SWITCH: langSwitch(p),
   };
   html = html.replace(/\{\{(\w+)\}\}/g, (m, k) => {
     if (!(k in fill)) throw new Error(`No value for {{${k}}}`);
