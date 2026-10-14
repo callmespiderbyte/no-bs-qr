@@ -924,9 +924,10 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     $$('.dlText').forEach(e=>e.textContent=label);
     $$('[data-dl]').forEach(b=>b.disabled=!current||n===0||(S.bgT&&S.fgT));
     const cf=S.fmts[0]||'svg';
-    const cl=cf==='svg'?'Copy SVG':cf==='png'?'Copy PNG':'Copy image';
+    const multi=S.fmts.length>1;
+    const cl=multi?'Pick one to copy':cf==='svg'?'Copy SVG':cf==='png'?'Copy PNG':'Copy image';
     $$('.copyText').forEach(e=>{ if(!e.parentNode.classList.contains('done')) e.textContent=cl; });
-    $$('[data-copy]').forEach(b=>{ b.disabled=!current; b.title=cf==='svg'?'Copies the SVG code. Paste it into Figma, Illustrator or your code.':cf==='png'?'Copies a PNG image to your clipboard.':'Clipboards only hold images as PNG, so this copies a PNG that looks like your '+cf.toUpperCase()+'.'; });
+    $$('[data-copy]').forEach(b=>{ b.disabled=!current||multi; b.title=multi?'Copy works with one format at a time. Deselect the others, or download them all as a zip.':cf==='svg'?'Copies the SVG code. Paste it into Figma, Illustrator or your code.':cf==='png'?'Copies a PNG image to your clipboard.':'Clipboards only hold images as PNG, so this copies a PNG that looks like your '+cf.toUpperCase()+'.'; });
     $('#dockTitle').textContent = current ? fileBase()+' · '+S.fmts.map(f=>f.toUpperCase()).join(', ') : stateTxt;
     $('#dockSub').textContent = warn || (current ? (current.n+' × '+current.n+', '+padLabel()) : 'Your code builds here');
   }
@@ -1054,7 +1055,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
   }
   function flash(){ $$('[data-copy]').forEach(b=>{ b.classList.add('done'); b.querySelector('.copyText').textContent='Copied'; }); clearTimeout(flash.t); flash.t=setTimeout(()=>{ $$('[data-copy]').forEach(b=>b.classList.remove('done')); render(); },1600); }
   async function doCopy(){
-    if(!current) return;
+    if(!current||S.fmts.length>1) return;
     const f=S.fmts[0]||'svg';
     if(f==='svg'){
       if(await copyText(current.svg)){ flash(); setStatus('SVG code copied. Paste it into Figma, Illustrator or your code.'); }
