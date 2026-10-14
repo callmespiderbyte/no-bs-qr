@@ -36,6 +36,12 @@ Open `index.html` in any modern browser. No build step, no server.
 
 To host it, import this repo on Vercel (no build settings needed) or drop `index.html` on any static host. `vercel.json` adds strict security headers.
 
+## For search engines and AI
+
+- `llms.txt` gives AI assistants a plain-language summary of what the tool does
+- `robots.txt` welcomes search engines and AI crawlers, and points to `sitemap.xml`
+- Structured data (WebApplication, HowTo, FAQ, source code) and social preview tags live in `index.html`
+
 ## Built with
 
 - [qrcode-generator](https://github.com/kazuhikoarase/qrcode-generator) (MIT)
