@@ -34,6 +34,7 @@
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"WebSite","@id":"https://nobs-qr.vercel.app/#website","url":"https://nobs-qr.vercel.app/","name":"No BS QR","alternateName":["No BS QR Code Generator"],"inLanguage":["en-GB","de"],"publisher":{"@id":"https://nobs-qr.vercel.app/#maker"}},{"@type":"Organization","@id":"https://nobs-qr.vercel.app/#maker","name":"Jomiro Eming Design Lab","url":"https://jomiro.de","sameAs":["https://github.com/callmespiderbyte"]},{"@type":"WebApplication","@id":"https://nobs-qr.vercel.app/#app","name":"No BS QR","url":"https://nobs-qr.vercel.app/","description":"Free QR code generator with no sign-up, no watermark and no expiry. Runs entirely in the browser, so nothing is uploaded or stored.","applicationCategory":"DesignApplication","applicationSubCategory":"QR code generator","operatingSystem":"Any (web browser)","browserRequirements":"Requires JavaScript","isAccessibleForFree":true,"inLanguage":["en-GB","de"],"image":"https://nobs-qr.vercel.app/og.png","screenshot":"https://nobs-qr.vercel.app/og.png","license":"https://opensource.org/licenses/MIT","offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"},"creator":{"@id":"https://nobs-qr.vercel.app/#maker"},"featureList":["QR codes for links, text, email, Wi-Fi, contact cards (vCard), calendar events, phone calls, SMS, WhatsApp and map locations","UTM tracking parameters for links","Logo in the centre with automatic high error correction","Custom colours with transparent background or foreground","Padding presets or exact pixel padding","Optional border with thickness, colour and spacing","Error correction L, M, Q or H","Export to SVG, PNG, JPG, WEBP and vector PDF","Multi-format zip download","Copy to clipboard","Input validation for links, emails, phone numbers and Wi-Fi passwords","No sign-up, no watermark, static QR codes that never expire","Runs locally in the browser; nothing uploaded or stored"]},{"@type":"SoftwareSourceCode","name":"No BS QR","codeRepository":"https://github.com/callmespiderbyte/no-bs-qr","programmingLanguage":["HTML","JavaScript"],"license":"https://opensource.org/licenses/MIT","targetProduct":{"@id":"https://nobs-qr.vercel.app/#app"},"author":{"@id":"https://nobs-qr.vercel.app/#maker"}},{"@type":"WebPage","@id":"https://nobs-qr.vercel.app/#page","url":"https://nobs-qr.vercel.app/","name":"Free QR Code Generator | No BS QR (no sign-up, no watermark)","description":"Free QR code generator with no sign-up, no watermark and no expiry. Make QR codes for links, Wi-Fi, vCards, events and more, with your logo. Download SVG, PNG, JPG, WEBP or PDF. Runs privately in your browser.","inLanguage":"en-GB","isPartOf":{"@id":"https://nobs-qr.vercel.app/#website"},"about":{"@id":"https://nobs-qr.vercel.app/#app"},"primaryImageOfPage":"https://nobs-qr.vercel.app/og.png"},{"@type":"HowTo","name":"How to make a free QR code","totalTime":"PT1M","inLanguage":"en-GB","tool":{"@type":"HowToTool","name":"No BS QR"},"step":[{"@type":"HowToStep","position":1,"name":"Choose what it opens","text":"A link, text, email, Wi-Fi login, contact card, calendar event, phone number, SMS, WhatsApp chat or map location."},{"@type":"HowToStep","position":2,"name":"Style it","text":"Pick colours, padding and an optional border. Add your logo in the centre if you like."},{"@type":"HowToStep","position":3,"name":"Pick your formats","text":"SVG for print and design tools, PNG, JPG or WEBP for screens, PDF for documents."},{"@type":"HowToStep","position":4,"name":"Download or copy","text":"Save the files, or copy the QR code straight to your clipboard. No account, no email, done."}]},{"@type":"FAQPage","@id":"https://nobs-qr.vercel.app/#faq","inLanguage":"en-GB","mainEntity":[{"@type":"Question","name":"Is it actually free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Every feature, every format, every size. No sign-up, no watermark, no trial, no premium tier waiting to ambush you."}},{"@type":"Question","name":"Do the QR codes expire?","acceptedAnswer":{"@type":"Answer","text":"Never. These are static QR codes: the content lives inside the QR code itself, so there is no subscription keeping it alive."}},{"@type":"Question","name":"What happens to my data?","acceptedAnswer":{"@type":"Answer","text":"Nothing. The QR code is generated in your browser. What you type or upload never touches a server and is not stored anywhere."}},{"@type":"Question","name":"Can I add my logo?","acceptedAnswer":{"@type":"Answer","text":"Yes. Drop a logo in the centre and the QR code switches to its strongest error correction so it still scans."}},{"@type":"Question","name":"Can I track scans?","acceptedAnswer":{"@type":"Answer","text":"Yes, honestly. Add UTM tags to a link and scans show up in your own analytics. No redirect service, no middleman."}},{"@type":"Question","name":"What can a QR code hold?","acceptedAnswer":{"@type":"Answer","text":"Links, text, email, Wi-Fi logins, contact cards, calendar events, phone numbers, SMS, WhatsApp chats and map locations. Download as SVG, PNG, JPG, WEBP or PDF."}}]}]}</script>
+<script>/* Arriving from a language switch: start fully pixelated so there is no flash before the dissolve */try{if(sessionStorage.getItem('nbq-pix')&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('pix-in')}catch(e){}</script>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -66,6 +67,9 @@ a{color:inherit}
 /* Header */
 header{position:relative;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 40px;margin-bottom:28px}
 /* Language switch: EN/DE drawn on a QR-style module grid; hovering scrambles it into the other language */
+/* Full-page pixel transition used when switching language */
+html.pix-in::after{content:"";position:fixed;inset:0;background:var(--ink);z-index:1000}
+.pixfx{position:fixed;inset:0;width:100vw;height:100vh;z-index:1001;pointer-events:none}
 .langflip{position:absolute;top:0;right:0;display:grid;justify-items:end;gap:6px;color:var(--ink);text-decoration:none;padding:6px;margin:-6px}
 .langflip canvas{display:block;width:78px;height:54px;image-rendering:pixelated}
 .langflip .cap{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);transition:color .2s}
@@ -1310,11 +1314,40 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
   a.addEventListener('pointerleave',e=>{ if(e.pointerType==='mouse') go(0); });
   a.addEventListener('focus',()=>go(1.3));
   a.addEventListener('blur',()=>go(0));
-  a.addEventListener('click',e=>{
-    if(e.metaKey||e.ctrlKey||e.shiftKey||e.button!==0||reduce||p>=1.3) return;
-    e.preventDefault(); go(1.3,()=>{ location.href=a.href; });
-  });
-  window.addEventListener('pageshow',()=>{ p=0; target=0; draw(); });
+  /* Whole-page transition: the page fills up with QR modules, spreading out from the switch,
+     then the new page dissolves out of them the same way. */
+  function pixelLayer(){
+    const c=document.createElement('canvas'); c.className='pixfx'; c.setAttribute('aria-hidden','true');
+    const w=innerWidth, h=innerHeight, d=Math.min(2,window.devicePixelRatio||1);
+    const M=Math.max(16,Math.round(Math.min(w,h)/26)), cols=Math.ceil(w/M), rows=Math.ceil(h/M);
+    c.width=Math.round(w*d); c.height=Math.round(h*d);
+    const x=c.getContext('2d'); x.scale(d,d);
+    const r=a.getBoundingClientRect(), ox=(r.left+r.width/2)/M, oy=(r.top+r.height/2)/M;
+    const far=Math.hypot(Math.max(ox,cols-ox),Math.max(oy,rows-oy));
+    const delay=new Float32Array(cols*rows);
+    for(let j=0;j<rows;j++) for(let i=0;i<cols;i++) delay[j*cols+i]=0.6*Math.hypot(i+.5-ox,j+.5-oy)/far+0.4*Math.random();
+    const col=getComputedStyle(document.documentElement).getPropertyValue('--ink').trim()||'#0c0c0b';
+    document.body.append(c);
+    return {c, paint(p,fill){ x.clearRect(0,0,w,h); x.fillStyle=col; x.beginPath();
+      for(let k=0;k<delay.length;k++){ const on=fill?delay[k]<p:delay[k]>=p; if(on) x.rect((k%cols)*M,Math.floor(k/cols)*M,M+0.5,M+0.5); }
+      x.fill(); }};
+  }
+  function run(L,fill,ms){ return new Promise(res=>{ const t0=performance.now(); (function f(now){ const p=Math.min(1,(now-t0)/ms)*1.05; L.paint(p,fill); if(p<1.05) requestAnimationFrame(f); else res(); })(t0); }); }
+  function leave(href){
+    if(reduce){ location.href=href; return; }
+    const L=pixelLayer();
+    run(L,true,480).then(()=>{ try{ sessionStorage.setItem('nbq-pix','1'); }catch(e){} location.href=href; });
+  }
+  document.querySelectorAll('a.langflip, a.lang').forEach(link=>link.addEventListener('click',e=>{
+    if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0) return;
+    e.preventDefault(); if(link===a) go(1.3); leave(link.href);
+  }));
+  if(document.documentElement.classList.contains('pix-in')){
+    try{ sessionStorage.removeItem('nbq-pix'); }catch(e){}
+    const L=pixelLayer(); L.paint(0,false); document.documentElement.classList.remove('pix-in');
+    run(L,false,520).then(()=>L.c.remove());
+  }
+  window.addEventListener('pageshow',e=>{ p=0; target=0; draw(); if(e.persisted){ document.querySelectorAll('.pixfx').forEach(n=>n.remove()); document.documentElement.classList.remove('pix-in'); } });
   if(window.matchMedia) matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',draw);
   window.addEventListener('resize',size);
   /* Arrive with a quick scramble into the current language */
