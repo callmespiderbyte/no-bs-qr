@@ -64,9 +64,9 @@ a{color:inherit}
 /* Header */
 header{position:relative;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px 40px;margin-bottom:28px}
 /* Language switch: EN/DE drawn on a QR-style module grid; hovering scrambles it into the other language */
-/* Language change: the page content pixelates through an SVG filter. Flat backgrounds stay as they are; only text and lines break into blocks. */
-html.pix-in body,body.pixing{filter:url(#nbq-pix)}
-.pixdefs{position:absolute;width:0;height:0;overflow:hidden}
+/* Full-page pixel transition used when switching language */
+html.pix-in::after{content:"";position:fixed;inset:0;background:var(--ink);z-index:1000}
+.pixfx{position:fixed;inset:0;width:100vw;height:100vh;z-index:1001;pointer-events:none}
 .langflip{position:absolute;top:0;right:0;display:grid;justify-items:end;gap:6px;color:var(--ink);text-decoration:none;padding:6px;margin:-6px}
 .langflip canvas{display:block;width:78px;height:54px;image-rendering:pixelated}
 .langflip .cap{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);transition:color .2s}
@@ -291,7 +291,6 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
 </style>
 </head>
 <body>
-<svg class="pixdefs" aria-hidden="true" focusable="false"><filter id="nbq-pix" x="0" y="0" width="100%" height="100%" color-interpolation-filters="sRGB"><feFlood id="pixDot" x="14" y="14" width="1" height="1"/><feComposite id="pixCell" width="28" height="28"/><feTile result="grid"/><feComposite in="SourceGraphic" in2="grid" operator="in"/><feMorphology id="pixGrow" operator="dilate" radius="14"/></filter></svg>
 <div class="wrap">
   <header>
     <div>
@@ -1318,20 +1317,29 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
   a.addEventListener('pointerleave',e=>{ if(e.pointerType==='mouse') go(0); });
   a.addEventListener('focus',()=>go(1.3));
   a.addEventListener('blur',()=>go(0));
-  /* Whole-page transition: everything with an edge (text, lines, the QR preview) breaks into QR-sized blocks,
-     the page changes, then the new language sharpens back out of the blocks. Backgrounds stay put. */
-  const dot=document.getElementById('pixDot'), cell=document.getElementById('pixCell'), grow=document.getElementById('pixGrow');
-  function pixel(n){ n=Math.max(1,Math.round(n)); const h=Math.floor(n/2);
-    dot.setAttribute('x',h); dot.setAttribute('y',h); cell.setAttribute('width',n); cell.setAttribute('height',n); grow.setAttribute('radius',Math.ceil(n/2)); }
-  const MAX=Math.max(18,Math.round(Math.min(innerWidth,innerHeight)/36));
-  /* The clock starts on the first painted frame, so a slow page load cannot skip the animation */
-  function ramp(fromN,toN,ms){ return new Promise(res=>{ let t0=null; requestAnimationFrame(function f(now){ if(t0===null) t0=now;
-    const k=Math.min(1,(now-t0)/ms), e=k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2; pixel(fromN+(toN-fromN)*e);
-    if(k<1) requestAnimationFrame(f); else res(); }); }); }
+  /* Whole-page transition: the page fills up with QR modules, spreading out from the switch,
+     then the new page dissolves out of them the same way. */
+  function pixelLayer(){
+    const c=document.createElement('canvas'); c.className='pixfx'; c.setAttribute('aria-hidden','true');
+    const w=innerWidth, h=innerHeight, d=Math.min(2,window.devicePixelRatio||1);
+    const M=Math.max(16,Math.round(Math.min(w,h)/26)), cols=Math.ceil(w/M), rows=Math.ceil(h/M);
+    c.width=Math.round(w*d); c.height=Math.round(h*d);
+    const x=c.getContext('2d'); x.scale(d,d);
+    const r=a.getBoundingClientRect(), ox=(r.left+r.width/2)/M, oy=(r.top+r.height/2)/M;
+    const far=Math.hypot(Math.max(ox,cols-ox),Math.max(oy,rows-oy));
+    const delay=new Float32Array(cols*rows);
+    for(let j=0;j<rows;j++) for(let i=0;i<cols;i++) delay[j*cols+i]=0.6*Math.hypot(i+.5-ox,j+.5-oy)/far+0.4*Math.random();
+    const col=getComputedStyle(document.documentElement).getPropertyValue('--ink').trim()||'#0c0c0b';
+    document.body.append(c);
+    return {c, paint(p,fill){ x.clearRect(0,0,w,h); x.fillStyle=col; x.beginPath();
+      for(let k=0;k<delay.length;k++){ const on=fill?delay[k]<p:delay[k]>=p; if(on) x.rect((k%cols)*M,Math.floor(k/cols)*M,M+0.5,M+0.5); }
+      x.fill(); }};
+  }
+  function run(L,fill,ms){ return new Promise(res=>{ const t0=performance.now(); (function f(now){ const p=Math.min(1,(now-t0)/ms)*1.05; L.paint(p,fill); if(p<1.05) requestAnimationFrame(f); else res(); })(t0); }); }
   function leave(href){
-    if(reduce||!dot){ location.href=href; return; }
-    pixel(1); document.body.classList.add('pixing');
-    ramp(1,MAX,420).then(()=>{ try{ sessionStorage.setItem('nbq-pix','1'); }catch(e){} location.href=href; });
+    if(reduce){ location.href=href; return; }
+    const L=pixelLayer();
+    run(L,true,480).then(()=>{ try{ sessionStorage.setItem('nbq-pix','1'); }catch(e){} location.href=href; });
   }
   document.querySelectorAll('a.langflip, a.lang').forEach(link=>link.addEventListener('click',e=>{
     if(e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||e.button!==0) return;
@@ -1339,10 +1347,10 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
   }));
   if(document.documentElement.classList.contains('pix-in')){
     try{ sessionStorage.removeItem('nbq-pix'); }catch(e){}
-    pixel(MAX); document.body.classList.add('pixing'); document.documentElement.classList.remove('pix-in');
-    ramp(MAX,1,520).then(()=>document.body.classList.remove('pixing'));
+    const L=pixelLayer(); L.paint(0,false); document.documentElement.classList.remove('pix-in');
+    run(L,false,520).then(()=>L.c.remove());
   }
-  window.addEventListener('pageshow',e=>{ p=0; target=0; draw(); if(e.persisted){ document.body.classList.remove('pixing'); document.documentElement.classList.remove('pix-in'); } });
+  window.addEventListener('pageshow',e=>{ p=0; target=0; draw(); if(e.persisted){ document.querySelectorAll('.pixfx').forEach(n=>n.remove()); document.documentElement.classList.remove('pix-in'); } });
   if(window.matchMedia) matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',draw);
   window.addEventListener('resize',size);
   /* Arrive with a quick scramble into the current language */
