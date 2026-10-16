@@ -160,6 +160,10 @@ button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .tiles svg{width:22px;height:22px;fill:currentColor;display:block}
 .seg.icons button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:9px 4px;font-size:10px}
 .seg.icons svg{width:16px;height:16px;fill:currentColor;display:block}
+.klabel{display:flex;align-items:center;gap:6px}
+.info{font:inherit;font-family:var(--mono);font-size:10px;font-weight:600;line-height:1;width:16px;height:16px;border-radius:50%;border:1px solid var(--stone);background:transparent;color:var(--graphite);display:inline-grid;place-items:center;cursor:pointer;padding:0;text-transform:none;letter-spacing:0}
+.info:hover,.info[aria-expanded=true]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.explain{margin:6px 0 0;font-size:11px;line-height:1.55;color:var(--graphite);background:var(--bone);border-left:2px solid var(--ink);padding:10px 12px}
 .padcustom{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:10px;font-size:11px;color:var(--stone)}
 .padcustom input{width:100%;font:inherit;font-size:13px;color:var(--ink);background:var(--paper);border:1px solid var(--ink);border-radius:0;padding:8px 10px;outline:none;font-variant-numeric:tabular-nums}
 .check{display:flex;align-items:center;gap:8px;font-size:11px;cursor:pointer;user-select:none}
@@ -514,14 +518,15 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
               <input id="padPx" type="number" min="0" step="1" inputmode="numeric" aria-label="Padding in pixels">
               <span id="padOf">px on each side of a 1024 px image</span>
             </div></div>
-          <div class="field"><span class="k">Error correction</span>
+          <div class="field"><span class="k klabel">Error correction <button type="button" class="info" id="eccInfo" aria-expanded="false" aria-controls="eccExplain" aria-label="What is error correction?">i</button></span>
             <div class="seg" role="group" aria-label="Error correction">
               <button type="button" data-ecc="L" aria-pressed="false">L</button>
               <button type="button" data-ecc="M" aria-pressed="true">M</button>
               <button type="button" data-ecc="Q" aria-pressed="false">Q</button>
               <button type="button" data-ecc="H" aria-pressed="false">H</button>
             </div>
-            <span style="font-size:10px;color:var(--stone)" id="eccHint"></span></div>
+            <span style="font-size:10px;color:var(--stone)" id="eccHint"></span>
+            <p class="explain" id="eccExplain" hidden>QR codes carry spare copies of their data. If part of the code gets scratched, dirty, folded or covered by a logo, a phone can rebuild what is missing and still scan it. Higher levels survive more damage but pack in more, smaller squares. M suits most uses. Pick H for a logo, outdoor prints or anything that might get scuffed. L keeps the code simplest when printing very small.</p></div>
           <p class="note" id="padNote" hidden>Spacing is set in the border options below.</p>
           <details id="borderBox">
             <summary>Add a border</summary>
@@ -747,7 +752,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     {name:'Ink, no background', bg:'#ffffff', fg:'#0c0c0b', bgT:true, fgT:false},
     {name:'Cut out of ink', bg:'#0c0c0b', fg:'#ffffff', bgT:false, fgT:true},
   ];
-  const ECC_HINT = {L:'Smallest QR code, survives 7% damage', M:'Balanced, survives 15% damage', Q:'Sturdy, survives 25% damage', H:'Toughest, survives 30%. Use it if a logo goes on top'};
+  const ECC_HINT = {L:'Simplest QR code. Still scans with 7% missing', M:'Balanced. Still scans with 15% missing', Q:'Sturdy. Still scans with 25% missing', H:'Toughest. Still scans with 30% missing, so use it with a logo'};
   const PAD_NAME = {0:'no padding',2:'slim padding',4:'standard padding',6:'roomy padding'};
   const MORE_NAME = {vcard:'Contact',event:'Event',tel:'Phone',sms:'SMS',whatsapp:'WhatsApp',geo:'Location'};
 
@@ -1282,6 +1287,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
   $('#bMatch').addEventListener('change',()=>{ if(!S.bMatch) S.bColor=S.fgT?S.bg:S.fg; render(); });
   $('#logoRemove').addEventListener('click',()=>{ Object.assign(S,{logo:null,logoPng:null,logoImg:null,logoName:''}); render(); });
   $$('[data-ecc]').forEach(b=>b.addEventListener('click',()=>{ S.ecc=b.dataset.ecc; render(); }));
+  $('#eccInfo').addEventListener('click',()=>{ const x=$('#eccExplain'); x.hidden=!x.hidden; $('#eccInfo').setAttribute('aria-expanded',String(!x.hidden)); });
   $$('[data-mod]').forEach(b=>b.addEventListener('click',()=>{ S.mod=b.dataset.mod; render(); }));
   $$('[data-eyeo]').forEach(b=>b.addEventListener('click',()=>{ S.eyeO=b.dataset.eyeo; render(); }));
   $$('[data-eyei]').forEach(b=>b.addEventListener('click',()=>{ S.eyeI=b.dataset.eyei; render(); }));

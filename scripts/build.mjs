@@ -25,7 +25,7 @@ function translateUI(html, dict) {
   const start = html.indexOf('<body>');
   let head = html.slice(0, start), body = html.slice(start);
   for (const [en, to] of dict) {
-    const forms = [[`>${en}<`, `>${to}<`], [`>${en}<span`, `>${to}<span`], [`> ${en}<`, `> ${to}<`], [`="${en}"`, `="${to}"`], [`'${en}'`, `'${to}'`]];
+    const forms = [[`>${en}<`, `>${to}<`], [`>${en}<span`, `>${to}<span`], [`>${en}<button`, `>${to}<button`], [`> ${en}<`, `> ${to}<`], [`="${en}"`, `="${to}"`], [`'${en}'`, `'${to}'`]];
     let hit = false;
     for (const [a, b] of forms) {
       if (body.includes(a)) { body = body.split(a).join(b); hit = true; }

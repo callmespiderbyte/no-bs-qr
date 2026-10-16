@@ -163,6 +163,10 @@ button:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
 .tiles svg{width:22px;height:22px;fill:currentColor;display:block}
 .seg.icons button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:9px 4px;font-size:10px}
 .seg.icons svg{width:16px;height:16px;fill:currentColor;display:block}
+.klabel{display:flex;align-items:center;gap:6px}
+.info{font:inherit;font-family:var(--mono);font-size:10px;font-weight:600;line-height:1;width:16px;height:16px;border-radius:50%;border:1px solid var(--stone);background:transparent;color:var(--graphite);display:inline-grid;place-items:center;cursor:pointer;padding:0;text-transform:none;letter-spacing:0}
+.info:hover,.info[aria-expanded=true]{background:var(--ink);border-color:var(--ink);color:var(--paper)}
+.explain{margin:6px 0 0;font-size:11px;line-height:1.55;color:var(--graphite);background:var(--bone);border-left:2px solid var(--ink);padding:10px 12px}
 .padcustom{display:grid;grid-template-columns:96px minmax(0,1fr);align-items:center;gap:10px;font-size:11px;color:var(--stone)}
 .padcustom input{width:100%;font:inherit;font-size:13px;color:var(--ink);background:var(--paper);border:1px solid var(--ink);border-radius:0;padding:8px 10px;outline:none;font-variant-numeric:tabular-nums}
 .check{display:flex;align-items:center;gap:8px;font-size:11px;cursor:pointer;user-select:none}
@@ -517,14 +521,15 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
               <input id="padPx" type="number" min="0" step="1" inputmode="numeric" aria-label="Abstand in Pixeln">
               <span id="padOf">px auf jeder Seite eines 1024-px-Bilds</span>
             </div></div>
-          <div class="field"><span class="k">Fehlerkorrektur</span>
+          <div class="field"><span class="k klabel">Fehlerkorrektur <button type="button" class="info" id="eccInfo" aria-expanded="false" aria-controls="eccExplain" aria-label="Was ist Fehlerkorrektur?">i</button></span>
             <div class="seg" role="group" aria-label="Fehlerkorrektur">
               <button type="button" data-ecc="L" aria-pressed="false">L</button>
               <button type="button" data-ecc="M" aria-pressed="true">M</button>
               <button type="button" data-ecc="Q" aria-pressed="false">Q</button>
               <button type="button" data-ecc="H" aria-pressed="false">H</button>
             </div>
-            <span style="font-size:10px;color:var(--stone)" id="eccHint"></span></div>
+            <span style="font-size:10px;color:var(--stone)" id="eccHint"></span>
+            <p class="explain" id="eccExplain" hidden>QR-Codes tragen Reservekopien ihrer Daten. Wird ein Teil zerkratzt, verschmutzt, geknickt oder von einem Logo verdeckt, rekonstruiert das Handy das Fehlende und scannt trotzdem. Höhere Stufen verkraften mehr Schaden, haben aber mehr und kleinere Quadrate. M passt für fast alles. Nimm H bei Logo, Außendrucken oder allem, was zerkratzen kann. L hält den Code am einfachsten, wenn du sehr klein druckst.</p></div>
           <p class="note" id="padNote" hidden>Den Abstand stellst du unten in den Rahmenoptionen ein.</p>
           <details id="borderBox">
             <summary>Rahmen hinzufügen</summary>
@@ -745,7 +750,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
     {name:'Schwarz, ohne Hintergrund', bg:'#ffffff', fg:'#0c0c0b', bgT:true, fgT:false},
     {name:'Ausgestanzt aus Schwarz', bg:'#0c0c0b', fg:'#ffffff', bgT:false, fgT:true},
   ];
-  const ECC_HINT = {L:'Kleinster QR-Code, verkraftet 7 % Schaden', M:'Ausgewogen, verkraftet 15 % Schaden', Q:'Robust, verkraftet 25 % Schaden', H:'Am stabilsten, verkraftet 30 %. Nimm das, wenn ein Logo draufkommt'};
+  const ECC_HINT = {L:'Einfachster QR-Code. Scannt noch, wenn 7 % fehlen', M:'Ausgewogen. Scannt noch, wenn 15 % fehlen', Q:'Robust. Scannt noch, wenn 25 % fehlen', H:'Am stabilsten. Scannt noch, wenn 30 % fehlen, also ideal mit Logo'};
   const PAD_NAME = {0:'ohne Abstand',2:'schmaler Abstand',4:'Standardabstand',6:'großzügiger Abstand'};
   const MORE_NAME = {vcard:'Kontakt',event:'Termin',tel:'Telefon',sms:'SMS',whatsapp:'WhatsApp',geo:'Standort'};
 
@@ -1280,6 +1285,7 @@ footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--ink);display:
   $('#bMatch').addEventListener('change',()=>{ if(!S.bMatch) S.bColor=S.fgT?S.bg:S.fg; render(); });
   $('#logoRemove').addEventListener('click',()=>{ Object.assign(S,{logo:null,logoPng:null,logoImg:null,logoName:''}); render(); });
   $$('[data-ecc]').forEach(b=>b.addEventListener('click',()=>{ S.ecc=b.dataset.ecc; render(); }));
+  $('#eccInfo').addEventListener('click',()=>{ const x=$('#eccExplain'); x.hidden=!x.hidden; $('#eccInfo').setAttribute('aria-expanded',String(!x.hidden)); });
   $$('[data-mod]').forEach(b=>b.addEventListener('click',()=>{ S.mod=b.dataset.mod; render(); }));
   $$('[data-eyeo]').forEach(b=>b.addEventListener('click',()=>{ S.eyeO=b.dataset.eyeo; render(); }));
   $$('[data-eyei]').forEach(b=>b.addEventListener('click',()=>{ S.eyeI=b.dataset.eyei; render(); }));
