@@ -16,7 +16,7 @@ A single-page QR code maker for links, plain text, email and Wi-Fi. It exports c
 - Optional UTM tracking on links, so scans show up in your own analytics without any redirect or third-party counter
 - Optional logo in the centre (read locally, never uploaded), with error correction locked to H so it still scans
 - Background and code colour, each with a transparent option, plus tonal presets
-- Patterns: square, dots or rounded modules, with square, rounded or circle corner frames and square, rounded or dot corner centres (vector in SVG and PDF)
+- Style: eight patterns (square, pixels, dots, rounded, diamonds, stars, vertical and horizontal bars), with square, rounded or circle corner frames and square, rounded or dot corner centres (vector in SVG and PDF)
 - Padding: none, slim, standard, roomy or an exact pixel value
 - Optional border with its own thickness, colour, gap to the code and margin to the edge, with a live check that the gap stays scannable
 - Checks what you type (links, email addresses, phone numbers, Wi-Fi passwords, event times, coordinates) and only builds the code once it's valid
