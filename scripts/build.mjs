@@ -137,7 +137,7 @@ function jsonld(p, t) {
         'QR codes for links, text, email, Wi-Fi, contact cards (vCard), calendar events, phone calls, SMS, WhatsApp and map locations',
         'UTM tracking parameters for links', 'Logo in the centre with automatic high error correction',
         'Custom colours with transparent background or foreground', 'Padding presets or exact pixel padding',
-        'Optional border with thickness, colour and spacing', 'Error correction L, M, Q or H',
+        'Optional border with thickness, colour and spacing', 'Module patterns: square, dots or rounded', 'Corner styles: square, rounded or circle frames with square, rounded or dot centres', 'Error correction L, M, Q or H',
         'Export to SVG, PNG, JPG, WEBP and vector PDF', 'Multi-format zip download', 'Copy to clipboard',
         'Input validation for links, emails, phone numbers and Wi-Fi passwords',
         'No sign-up, no watermark, static QR codes that never expire', 'Runs locally in the browser; nothing uploaded or stored',
